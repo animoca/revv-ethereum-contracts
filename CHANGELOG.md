@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.0
+
+### Breaking changes
+ * Updated contract name, name and symbol from FormulaREVVInventory to REVVMotorsportInventory.
+
 ## 3.0.0
 
 ### Breaking changes
