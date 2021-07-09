@@ -2,18 +2,22 @@
 
 pragma solidity >=0.7.6 <0.8.0;
 
-import {ManagedIdentity, Ownable, Recoverable, RecoverableERC20} from "@animoca/ethereum-contracts-core-1.0.1/contracts/utils/Recoverable.sol";
-import {ChildERC20} from "@animoca/ethereum-contracts-assets-1.0.2/contracts/token/ERC20/ChildERC20.sol";
+import {IWrappedERC20, ERC20Wrapper} from "@animoca/ethereum-contracts-core-1.1.0/contracts/utils/ERC20Wrapper.sol";
+import {ManagedIdentity, Ownable, Recoverable} from "@animoca/ethereum-contracts-core-1.1.0/contracts/utils/Recoverable.sol";
+import {ChildERC20} from "@animoca/ethereum-contracts-assets-1.1.1/contracts/token/ERC20/ChildERC20.sol";
 import {IForwarderRegistry, UsingUniversalForwarding} from "ethereum-universal-forwarder/src/solc_0.7/ERC2771/UsingUniversalForwarding.sol";
 
 contract PolygonREVV is Recoverable, UsingUniversalForwarding, ChildERC20 {
+    using ERC20Wrapper for IWrappedERC20;
+
     uint256 public escrowed;
 
     constructor(
         uint256 supply,
+        address childChainManager,
         IForwarderRegistry forwarderRegistry,
         address universalForwarder
-    ) ChildERC20("REVV", "REVV", 18, "") UsingUniversalForwarding(forwarderRegistry, universalForwarder) Ownable(msg.sender) {
+    ) ChildERC20("REVV", "REVV", 18, "", childChainManager) UsingUniversalForwarding(forwarderRegistry, universalForwarder) Ownable(msg.sender) {
         _mint(address(this), supply);
         escrowed = supply;
     }
@@ -24,10 +28,8 @@ contract PolygonREVV is Recoverable, UsingUniversalForwarding, ChildERC20 {
     }
 
     function deposit(address user, bytes calldata depositData) public virtual override {
-        _requireDepositorRole(_msgSender());
-        uint256 amount = abi.decode(depositData, (uint256));
-        escrowed -= amount;
-        _transfer(address(this), user, amount);
+        escrowed -= abi.decode(depositData, (uint256));
+        super.deposit(user, depositData);
     }
 
     function withdraw(uint256 amount) public virtual override {
@@ -60,7 +62,7 @@ contract PolygonREVV is Recoverable, UsingUniversalForwarding, ChildERC20 {
                 uint256 recoverable = _balances[address(this)] - escrowed;
                 require(amount <= recoverable, "Recov: insufficient balance");
             }
-            require(RecoverableERC20(token).transfer(accounts[i], amount), "Recov: transfer failed");
+            IWrappedERC20(token).wrappedTransfer(accounts[i], amount);
         }
     }
 

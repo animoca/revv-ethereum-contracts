@@ -48,10 +48,9 @@ const implementation = {
   },
   methods: {},
   deploy: async function (initialHolders, initialBalances, deployer) {
-    // const forwarder = await artifacts.require('NoStorageUniversalForwarder').new({from: deployer});
-    // const registry = await artifacts.require('ForwarderRegistry').new({from: deployer});
-    // return artifacts.require('PolygonREVV').new(initialHolders, initialBalances, forwarder.address, registry.address, {from: deployer});
-    return artifacts.require('PolygonREVV').new(initialHolders, initialBalances, ZeroAddress, ZeroAddress, {from: deployer});
+    const registry = await artifacts.require('ForwarderRegistry').new({from: deployer});
+    const forwarder = await artifacts.require('UniversalForwarder').new({from: deployer});
+    // return artifacts.require('PolygonREVV').new(initialBalances[0], ZeroAddress, registry.address, forwarder.address, {from: deployer});
   },
 };
 

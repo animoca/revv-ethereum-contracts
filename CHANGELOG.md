@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.2.0
+
+### Breaking changes
+ * Updated dependencies versions: `@animoca/ethereum-contracts-core@1.1.0` and `@animoca/ethereum-contracts-assets@1.1.1`.
+
 ## 3.1.0
 
 ### Breaking changes
