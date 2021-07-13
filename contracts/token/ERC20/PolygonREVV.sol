@@ -2,9 +2,9 @@
 
 pragma solidity >=0.7.6 <0.8.0;
 
-import {IWrappedERC20, ERC20Wrapper} from "@animoca/ethereum-contracts-core-1.1.0/contracts/utils/ERC20Wrapper.sol";
-import {ManagedIdentity, Ownable, Recoverable} from "@animoca/ethereum-contracts-core-1.1.0/contracts/utils/Recoverable.sol";
-import {ChildERC20} from "@animoca/ethereum-contracts-assets-1.1.1/contracts/token/ERC20/ChildERC20.sol";
+import {IWrappedERC20, ERC20Wrapper} from "@animoca/ethereum-contracts-core-1.1.1/contracts/utils/ERC20Wrapper.sol";
+import {ManagedIdentity, Ownable, Recoverable} from "@animoca/ethereum-contracts-core-1.1.1/contracts/utils/Recoverable.sol";
+import {ChildERC20} from "@animoca/ethereum-contracts-assets-1.1.3/contracts/token/ERC20/ChildERC20.sol";
 import {IForwarderRegistry, UsingUniversalForwarding} from "ethereum-universal-forwarder/src/solc_0.7/ERC2771/UsingUniversalForwarding.sol";
 
 contract PolygonREVV is Recoverable, UsingUniversalForwarding, ChildERC20 {

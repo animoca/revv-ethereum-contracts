@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.2.1
+
+### Fixes
+ * Updated dependencies for yarn audit fixes and warning messages during tests.
+
 ## 3.2.0
 
 ### Breaking changes
