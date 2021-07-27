@@ -26,13 +26,6 @@ describe('SessionsManager', function () {
     await fixtureLoader(fixture, this);
   });
 
-  // context('constructor', function () {
-  //   it('it reverts with inconsistent arrays', async function () {
-  //     await expectRevert(implementation.deploy([], [Two], deployer), implementation.revertMessages.InconsistentArrays);
-  //     await expectRevert(implementation.deploy([other, other], [Two], deployer), implementation.revertMessages.InconsistentArrays);
-  //   });
-  // });
-
   describe('setSessionPrice', function () {
     it('it reverts if the sender is not the contract owner', async function () {
       await expectRevert(this.contract.setSessionPrice(One, {from: other}), 'Ownable: not the owner');
