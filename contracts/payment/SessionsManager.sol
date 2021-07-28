@@ -7,6 +7,9 @@ import {ManagedIdentity, Ownable, Recoverable} from "@animoca/ethereum-contracts
 import {PayoutWallet} from "@animoca/ethereum-contracts-core-1.1.1/contracts/payment/PayoutWallet.sol";
 import {ERC20Receiver} from "@animoca/ethereum-contracts-assets-1.1.3/contracts/token/ERC20/ERC20Receiver.sol";
 
+/**
+ * @title SessionsManager, a contract to register game sessions in REVV Racing.
+ */
 contract SessionsManager is Recoverable, ERC20Receiver, PayoutWallet {
     using ERC20Wrapper for IWrappedERC20;
 
@@ -44,7 +47,7 @@ contract SessionsManager is Recoverable, ERC20Receiver, PayoutWallet {
     }
 
     /**
-     * Sets `price` as the new session price.
+     * Sets `price` as the new session price. Setting a zero price will prevent any session to be admitted.
      * @dev Reverts if the sender is not the contract owner.
      * @param price the new session price.
      */
