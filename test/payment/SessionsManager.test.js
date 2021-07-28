@@ -78,28 +78,40 @@ describe('SessionsManager', function () {
       await expectRevert(this.revv.safeTransfer(this.contract.address, Two, '0x0', {from: participant}), 'Sessions: wrong price');
     });
 
-    it('it emits an Admission event on success (free session)', async function () {
-      await this.contract.setSessionPrice(Two, {from: deployer});
-      await this.contract.addFreeSessions(One, {from: deployer});
-      const receipt = await this.revv.safeTransfer(this.contract.address, Zero, encodedSessionId, {
-        from: participant,
+    const price = Two;
+
+    describe('when successful (free session)', function () {
+      beforeEach(async function () {
+        await this.contract.addFreeSessions(One, {from: deployer});
+        await this.contract.setSessionPrice(price, {from: deployer});
+        this.receipt = await this.revv.safeTransfer(this.contract.address, Zero, encodedSessionId, {
+          from: participant,
+        });
       });
 
-      await expectEvent.inTransaction(receipt.tx, this.contract, 'Admission', {
-        account: participant,
-        sessionId,
-        amount: Zero,
+      it('increments the user free sessions counter', async function () {
+        (await this.contract.freeSessionsUsed(participant)).should.be.bignumber.equal(One);
+      });
+
+      it('it emits an Admission event', async function () {
+        await expectEvent.inTransaction(this.receipt.tx, this.contract, 'Admission', {
+          account: participant,
+          sessionId,
+          amount: Zero,
+        });
       });
     });
 
     describe('when successful (paid session)', function () {
-      const price = Two;
-
       beforeEach(async function () {
         await this.contract.setSessionPrice(price, {from: deployer});
         this.receipt = await this.revv.safeTransfer(this.contract.address, Two, encodedSessionId, {
           from: participant,
         });
+      });
+
+      it('does not increment the user free sessions counter', async function () {
+        (await this.contract.freeSessionsUsed(participant)).should.be.bignumber.equal(Zero);
       });
 
       it('it emits an ERC20 Transfer event to the payout wallet', async function () {
@@ -110,7 +122,7 @@ describe('SessionsManager', function () {
         });
       });
 
-      it('it emits an Admission event (paid session)', async function () {
+      it('it emits an Admission event', async function () {
         await expectEvent.inTransaction(this.receipt.tx, this.contract, 'Admission', {
           account: participant,
           sessionId,
