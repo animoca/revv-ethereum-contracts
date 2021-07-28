@@ -6,9 +6,8 @@ import {IWrappedERC20, ERC20Wrapper} from "@animoca/ethereum-contracts-core-1.1.
 import {ManagedIdentity, Ownable, Recoverable} from "@animoca/ethereum-contracts-core-1.1.1/contracts/utils/Recoverable.sol";
 import {PayoutWallet} from "@animoca/ethereum-contracts-core-1.1.1/contracts/payment/PayoutWallet.sol";
 import {ERC20Receiver} from "@animoca/ethereum-contracts-assets-1.1.3/contracts/token/ERC20/ERC20Receiver.sol";
-import {IForwarderRegistry, UsingUniversalForwarding} from "ethereum-universal-forwarder/src/solc_0.7/ERC2771/UsingUniversalForwarding.sol";
 
-contract SessionsManager is Recoverable, UsingUniversalForwarding, ERC20Receiver, PayoutWallet {
+contract SessionsManager is Recoverable, ERC20Receiver, PayoutWallet {
     using ERC20Wrapper for IWrappedERC20;
 
     /**
@@ -26,12 +25,7 @@ contract SessionsManager is Recoverable, UsingUniversalForwarding, ERC20Receiver
 
     mapping(address => uint256) public freeSessionsUsed; // the number of free sessions used by account.
 
-    constructor(
-        IForwarderRegistry forwarderRegistry,
-        address universalForwarder,
-        IWrappedERC20 revvToken_,
-        address payable payoutWallet
-    ) UsingUniversalForwarding(forwarderRegistry, universalForwarder) PayoutWallet(msg.sender, payoutWallet) {
+    constructor(IWrappedERC20 revvToken_, address payable payoutWallet) PayoutWallet(msg.sender, payoutWallet) {
         revvToken = revvToken_;
     }
 
@@ -91,15 +85,5 @@ contract SessionsManager is Recoverable, UsingUniversalForwarding, ERC20Receiver
         emit Admission(from, abi.decode(data, (string)), value);
 
         return _ERC20_RECEIVED;
-    }
-
-    // Meta-transactions
-
-    function _msgSender() internal view virtual override(ManagedIdentity, UsingUniversalForwarding) returns (address payable) {
-        return UsingUniversalForwarding._msgSender();
-    }
-
-    function _msgData() internal view virtual override(ManagedIdentity, UsingUniversalForwarding) returns (bytes memory ret) {
-        return UsingUniversalForwarding._msgData();
     }
 }
