@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.3.0
+### New features
+ * Added `SessionsManager.sol` to manage REVV Racing game sessions.
+
 ## 3.2.1
 
 ### Fixes
