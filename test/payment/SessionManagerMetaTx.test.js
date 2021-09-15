@@ -4,7 +4,6 @@ const {createFixtureLoader} = require('@animoca/ethereum-contracts-core/test/uti
 const [deployer, anyone] = accounts;
 const eip712 = require('./eip712');
 const ethSigUtil = require('eth-sig-util');
-const {expect} = require('chai');
 
 describe('SessionsManager Meta Transaction', function () {
   this.timeout(0);
@@ -30,7 +29,7 @@ describe('SessionsManager Meta Transaction', function () {
   });
 
   describe('Session Manager', function () {
-    it('should able to purchase sesssion without approval', async function () {
+    it('should be able to purchase sesssion through approveAndForward', async function () {
       // make the session id purchase here.
       const sessionId = 'the_session_id';
       const sessionIdData = web3.eth.abi.encodeParameters(['string'], [sessionId]);
@@ -77,8 +76,8 @@ describe('SessionsManager Meta Transaction', function () {
         approved: true,
         nonce: 0,
       });
-      expect(await this.registry.isForwarderFor(this.participant, this.minimalForwarder.address)).equal(true);
-      expect((await this.registry.getNonce(this.participant, this.minimalForwarder.address)).toString()).equals('1');
+      (await this.registry.isForwarderFor(this.participant, this.minimalForwarder.address)).should.be.true;
+      (await this.registry.getNonce(this.participant, this.minimalForwarder.address)).should.be.bignumber.equal('1');
       const contractCallData2 = this.revv.contract.methods.safeTransfer(this.sessionManager.address, new BN(10), sessionIdData).encodeABI();
       const forwardRequest2 = {
         from: this.participant,
