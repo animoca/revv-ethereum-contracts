@@ -18,6 +18,8 @@ describe('SessionsManager', function () {
     const forwarder = await artifacts.require('UniversalForwarder').new({from: deployer});
     this.revv = await artifacts.require('ERC20Mock').new([participant], [new BN('10')], registry.address, forwarder.address, {from: deployer});
     this.contract = await artifacts.require('SessionsManager').new(this.revv.address, deployer, {from: deployer});
+    this.registry = registry;
+    this.forwarder = forwarder;
   };
 
   beforeEach(async function () {
