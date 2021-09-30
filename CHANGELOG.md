@@ -10,6 +10,7 @@
 ### New features
 
 - Added new contract `REVVRacingInventory` to migrate implementation from existing `REVVMotorsportInventory`.
+- Added new contract `REVVxUndoneVouchersRedeemer.sol`.
 - Added markdown linting.
 
 ## 3.3.0

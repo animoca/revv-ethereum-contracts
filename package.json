@@ -1,6 +1,6 @@
 {
   "name": "@animoca/revv-ethereum-contracts",
-  "version": "4.0.0-pre.0",
+  "version": "4.0.0-pre.1",
   "description": "REVV Solidity Contracts",
   "author": "Animoca Brands",
   "license": "MIT",
@@ -54,8 +54,8 @@
   },
   "devDependencies": {
     "@animoca/blockchain-inventory_metadata": "^0.1.0",
-    "@animoca/ethereum-contracts-assets": "^2.0.0-pre.0",
-    "@animoca/ethereum-contracts-assets-2.0.0": "npm:@animoca/ethereum-contracts-assets@2.0.0-pre.0",
+    "@animoca/ethereum-contracts-assets": "^2.0.0-pre.1",
+    "@animoca/ethereum-contracts-assets-2.0.0": "npm:@animoca/ethereum-contracts-assets@2.0.0-pre.1",
     "@animoca/ethereum-contracts-core": "^1.1.2",
     "@animoca/ethereum-contracts-core-1.1.2": "npm:@animoca/ethereum-contracts-core@1.1.2",
     "@animoca/ethereum-hardhat-bootstrap": "^1.0.1",
