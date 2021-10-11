@@ -1,4 +1,6 @@
 const {artifacts} = require('hardhat');
+const {constants} = require('@animoca/ethereum-contracts-core');
+const {ZeroAddress} = constants;
 const {shouldBehaveLikeERC1155721} = require('@animoca/ethereum-contracts-assets/test/contracts/token/ERC1155721/behaviors/ERC1155721.behavior');
 
 const implementation = {
@@ -92,7 +94,7 @@ const implementation = {
   deploy: async function (deployer) {
     const registry = await artifacts.require('ForwarderRegistry').new({from: deployer});
     const forwarder = await artifacts.require('UniversalForwarder').new({from: deployer});
-    return artifacts.require('REVVRacingInventoryMock').new(registry.address, forwarder.address, {from: deployer});
+    return artifacts.require('REVVRacingInventoryMock').new(registry.address, ZeroAddress, {from: deployer});
   },
   mint: async function (contract, to, id, value, overrides) {
     return contract.methods['safeMint(address,uint256,uint256,bytes)'](to, id, value, '0x', overrides);
@@ -103,8 +105,6 @@ const [deployer] = accounts;
 
 describe('REVVRacingInventory', function () {
   this.timeout(0);
-
-  const [deployer] = accounts;
 
   context('_msgData()', function () {
     it('call for 100% coverage', async function () {
