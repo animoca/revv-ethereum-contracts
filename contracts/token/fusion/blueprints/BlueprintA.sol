@@ -2,23 +2,21 @@
 
 pragma solidity >=0.7.6 <0.8.0;
 
-import {IREVV, IREVVRacingCar, IREVVMotorsportCatalyst, FusionStorageLib} from "./../libraries/FusionStorageLib.sol";
-import {ERC1155TokenReceiver} from "@animoca/ethereum-contracts-assets/contracts/token/ERC1155/ERC1155TokenReceiver.sol";
-import {IERC1155} from "@animoca/ethereum-contracts-assets/contracts/token/ERC1155/interfaces/IERC1155.sol";
-import {IERC1155InventoryMintable} from "@animoca/ethereum-contracts-assets/contracts/token/ERC1155/interfaces/IERC1155InventoryMintable.sol";
-import {ERC1155TokenReceiver} from "@animoca/ethereum-contracts-assets/contracts/token/ERC1155/ERC1155TokenReceiver.sol";
+import {IREVVRacingCar, LibFusion} from "./../libraries/LibFusion.sol";
+import {BlueprintBase} from "./BlueprintBase.sol";
 
-/**
- * @title ERC20 Receiver Mock.
- */
-contract BlueprintA is ERC1155TokenReceiver {
+contract BlueprintA is BlueprintBase {
+    uint256 public immutable spentTokenMask;
+    uint256 public immutable deliveredTokenMask;
+    uint256 public immutable catalystCost;
+    uint256 public immutable revvCost;
 
-    uint256 immutable public spentTokenMask;
-    uint256 immutable public deliveredTokenMask;
-    uint256 immutable public catalystCost;
-    uint256 immutable public revvCost;
-
-    constructor(uint256 spentTokenMask_, uint256 deliveredTokenMask_, uint256 catalystCost_, uint256 revvCost_) {
+    constructor(
+        uint256 spentTokenMask_,
+        uint256 deliveredTokenMask_,
+        uint256 catalystCost_,
+        uint256 revvCost_
+    ) {
         spentTokenMask = spentTokenMask_;
         deliveredTokenMask = deliveredTokenMask_;
         catalystCost = catalystCost_;
@@ -34,7 +32,7 @@ contract BlueprintA is ERC1155TokenReceiver {
         uint256 value,
         bytes calldata /*data*/
     ) external override returns (bytes4) {
-        FusionStorageLib.FusionStorage storage fs = FusionStorageLib.fusionStorage();
+        LibFusion.FusionStorage storage fs = LibFusion.fusionStorage();
         IREVVRacingCar cars = fs.cars;
         require(msg.sender == address(cars), "Fusion: wrong sender");
         require(id & spentTokenMask == spentTokenMask, "Fusion: wrong token type");
@@ -53,6 +51,6 @@ contract BlueprintA is ERC1155TokenReceiver {
         uint256[] calldata, /*values,*/
         bytes calldata /*data*/
     ) external pure override returns (bytes4) {
-        revert('Fusion: unsupported call');
+        revert("Fusion: unsupported call");
     }
 }
