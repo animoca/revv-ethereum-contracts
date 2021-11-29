@@ -10,9 +10,9 @@ import {MinterRole} from "@animoca/ethereum-contracts-core/contracts/access/Mint
 import {Recoverable} from "@animoca/ethereum-contracts-core/contracts/utils/Recoverable.sol";
 
 /**
- * @title ERC20 Receiver Mock.
+ * @title REVV Racing Catalysts Builder which converts SHRD into CATA.
  */
-contract CatalystBuilder is ERC20Receiver, MinterRole, Recoverable {
+contract REVVRacingCatalystBuilder is ERC20Receiver, MinterRole, Recoverable {
     event ConversionRateUpdated(uint256 conversionRate);
 
     IERC20Burnable public immutable shards;

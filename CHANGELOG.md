@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.0.1
+
+### Bugfixes
+
+- Renamed `REVVMotorsportCatalyst` to `REVVRacingCatalyst`.
+
 ## 5.0.0
 
 ### New features

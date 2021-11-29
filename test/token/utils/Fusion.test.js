@@ -42,7 +42,7 @@ describe('Fusion', function () {
     this.cars = await artifacts.require('REVVRacingInventory').new(registry.address, ZeroAddress, {from: deployer});
     await this.cars.batchMint(participant, [blueprintACar1, blueprintBCar1, blueprintBCar2, otherCar1, otherCar2], {from: deployer});
 
-    this.catalysts = await artifacts.require('REVVMotorsportCatalystMock').new([participant], [100], registry.address, {from: deployer});
+    this.catalysts = await artifacts.require('REVVRacingCatalystMock').new([participant], [100], registry.address, {from: deployer});
     this.revv = await artifacts.require('ERC20Mock').new([participant], [100], registry.address, ZeroAddress, {from: deployer});
     this.counters = await artifacts.require('ChassisCounters').new({from: deployer});
 

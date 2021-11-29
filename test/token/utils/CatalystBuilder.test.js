@@ -4,14 +4,14 @@ const interfaces20 = require('@animoca/ethereum-contracts-assets/src/interfaces/
 const {constants, behaviors} = require('@animoca/ethereum-contracts-core');
 const {ZeroAddress, EmptyByte} = constants;
 
-describe('CatalystBuilder', function () {
+describe('REVVRacingCatalystBuilder', function () {
   const [deployer, other] = accounts;
 
   beforeEach(async function () {
     const registry = await artifacts.require('ForwarderRegistry').new({from: deployer});
     this.shards = await artifacts.require('REVVMotorsportShard').new(registry.address, {from: deployer});
-    this.catalysts = await artifacts.require('REVVMotorsportCatalyst').new(registry.address, {from: deployer});
-    this.contract = await artifacts.require('CatalystBuilder').new(this.shards.address, this.catalysts.address, {from: deployer});
+    this.catalysts = await artifacts.require('REVVRacingCatalyst').new(registry.address, {from: deployer});
+    this.contract = await artifacts.require('REVVRacingCatalystBuilder').new(this.shards.address, this.catalysts.address, {from: deployer});
     await this.catalysts.addMinter(this.contract.address, {from: deployer});
   });
 
