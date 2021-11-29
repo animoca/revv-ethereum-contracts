@@ -9,10 +9,10 @@
   dependencies:
     big-integer "^1.6.48"
 
-"@animoca/ethereum-contracts-assets@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@animoca/ethereum-contracts-assets/-/ethereum-contracts-assets-3.0.0.tgz#d54ee5d2a59bad0ef647ed67eae7c98711a168f4"
-  integrity sha512-CnqwT4+qs07NGd+j2JDy3i9DRQdQS1P8M5KtRSpg4ZHlcyFH8gXCc8EMt8KVuk+y+D8JdFa1sEYCQhRaG+8yLA==
+"@animoca/ethereum-contracts-assets@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@animoca/ethereum-contracts-assets/-/ethereum-contracts-assets-3.0.1.tgz#08d0db243e7a7c146851dd6b50b79cbf354bd578"
+  integrity sha512-IlgJc/lzJjBF2ODPx0MSnDUE9WQ66p9qNo+c7yBr/yCgcfmLqluSy2gr8dhJfVPdoxErFRdjUdnWE0fuxpU57g==
   dependencies:
     "@animoca/blockchain-inventory_metadata" "^0.1.0"
     bits.js "^0.1.1"

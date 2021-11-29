@@ -7,7 +7,7 @@ const {shouldBehaveLikeERC20} = require('@animoca/ethereum-contracts-assets/test
 const implementation = {
   contractName: 'REVVMotorsportShard',
   name: 'REVV Motorsport Shard',
-  symbol: 'RMS',
+  symbol: 'SHRD',
   decimals: new BN(18),
   tokenURI: 'uri',
   revertMessages: {

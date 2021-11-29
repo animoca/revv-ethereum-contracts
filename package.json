@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@animoca/blockchain-inventory_metadata": "^0.1.0",
-    "@animoca/ethereum-contracts-assets": "^3.0.0",
+    "@animoca/ethereum-contracts-assets": "^3.0.1",
     "@animoca/ethereum-contracts-core": "^1.1.3",
     "@animoca/ethereum-hardhat-bootstrap": "^1.0.1",
     "@animoca/f1dt-ethereum-contracts": "^3.0.2",

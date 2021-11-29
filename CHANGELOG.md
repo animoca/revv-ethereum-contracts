@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.0.0
+
+### New features
+
+- Added new contracts `REVVMotorsportShard.sol`, `REVVMotorsportCatalyst.sol`, `PolygonREVVMotorsportShard.sol` and `PolygonREVVMotorsportCatalyst.sol`.
+- Added contract `CatalystBuilder.sol` (WIP).
+- Added fusion system design (WIP).
+
 ## 4.0.0
 
 ### Breaking Changes

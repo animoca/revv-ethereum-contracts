@@ -11,11 +11,11 @@ import {MinterRole} from "@animoca/ethereum-contracts-core/contracts/access/Mint
 import {ERC20Burnable} from "@animoca/ethereum-contracts-assets/contracts/token/ERC20/ERC20Burnable.sol";
 
 /**
- * @title REVV Racing Common Catalysts.
+ * @title REVV Motorsport Catalysts Token.
  */
 contract REVVMotorsportCatalyst is Recoverable, UsingUniversalForwarding, ERC20Burnable, IERC20Mintable, MinterRole {
     constructor(IForwarderRegistry forwarderRegistry)
-        ERC20Burnable("REVV Motorsport Catalyst", "RMC", 18)
+        ERC20Burnable("REVV Motorsport Catalyst", "CATA", 18)
         MinterRole(msg.sender)
         UsingUniversalForwarding(forwarderRegistry, address(0))
     {}

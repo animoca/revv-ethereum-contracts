@@ -7,7 +7,7 @@ const {shouldBehaveLikeERC20} = require('@animoca/ethereum-contracts-assets/test
 const implementation = {
   contractName: 'REVVMotorsportCatalyst',
   name: 'REVV Motorsport Catalyst',
-  symbol: 'RMC',
+  symbol: 'CATA',
   decimals: new BN(18),
   tokenURI: 'uri',
   revertMessages: {
