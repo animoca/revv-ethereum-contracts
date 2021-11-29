@@ -2,6 +2,12 @@
 
 ## 5.0.0
 
+### Bugfixes
+
+- Renamed `REVVMotorsportCatalyst` to `REVVRacingCatalyst`.
+
+## 5.0.0
+
 ### New features
 
 - Added new contracts `REVVMotorsportShard.sol`, `REVVMotorsportCatalyst.sol`, `PolygonREVVMotorsportShard.sol` and `PolygonREVVMotorsportCatalyst.sol`.
