@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.1.0
+
+### Chores
+
+- Removed fusion and catalyst building setup, to be added back in next major version.
+
 ## 5.0.1
 
 ### Bugfixes
