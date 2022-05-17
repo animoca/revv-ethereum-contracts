@@ -1,0 +1,37 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "BaseBlueprintFacet",
+  "sourceName": "contracts/token/fusion/blueprints/BaseBlueprintFacet.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "cars",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "revv",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "cata",
+          "type": "address"
+        },
+        {
+          "internalType": "contract IForwarderRegistry",
+          "name": "forwarderRegistry",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "bytecode": "0x61010060405234801561001157600080fd5b506040516101343803806101348339810160408190526100309161006b565b6001600160a01b0390811660805292831660a05290821660c0521660e0526100ca565b6001600160a01b038116811461006857600080fd5b50565b6000806000806080858703121561008157600080fd5b845161008c81610053565b602086015190945061009d81610053565b60408601519093506100ae81610053565b60608601519092506100bf81610053565b939692955090935050565b60805160a05160c05160e051603f6100f560003960005050600050506000505060005050603f6000f3fe6080604052600080fdfea264697066735822122075ef7b4ba3d9fc10eba4386c7a17ea49ca5d426dc262076f5e603f4b7c6b66e364736f6c634300080d0033",
+  "deployedBytecode": "0x6080604052600080fdfea264697066735822122075ef7b4ba3d9fc10eba4386c7a17ea49ca5d426dc262076f5e603f4b7c6b66e364736f6c634300080d0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

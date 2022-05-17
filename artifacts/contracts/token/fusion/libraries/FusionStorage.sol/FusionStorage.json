@@ -1,0 +1,50 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "FusionStorage",
+  "sourceName": "contracts/token/fusion/libraries/FusionStorage.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "CHASSIS_MASK",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "FUSION_STORAGE_POSITION",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "FUSION_VERSION_SLOT",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x61010661003a600b82828239805160001a60731461002d57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe730000000000000000000000000000000000000000301460806040526004361060475760003560e01c80630cd70d7814604c5780637a54436b1460845780639847dce61460aa575b600080fd5b60727f139a82e4d23c950a1f75022572675c36e54d9acb2d9afa474c2855ee7a3af76f81565b60405190815260200160405180910390f35b60727fe9f115eb6863a5710ccbcd50786f226816925aee1eb1fe925aafb2687d46956081565b60727ffffffff80000000000000000ff00000000000000000000000000ffff000000008156fea264697066735822122023c12a251673b3874ca2b2a57be52739d3e9382de9cbba9bf8e04437155c357464736f6c634300080d0033",
+  "deployedBytecode": "0x730000000000000000000000000000000000000000301460806040526004361060475760003560e01c80630cd70d7814604c5780637a54436b1460845780639847dce61460aa575b600080fd5b60727f139a82e4d23c950a1f75022572675c36e54d9acb2d9afa474c2855ee7a3af76f81565b60405190815260200160405180910390f35b60727fe9f115eb6863a5710ccbcd50786f226816925aee1eb1fe925aafb2687d46956081565b60727ffffffff80000000000000000ff00000000000000000000000000ffff000000008156fea264697066735822122023c12a251673b3874ca2b2a57be52739d3e9382de9cbba9bf8e04437155c357464736f6c634300080d0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
