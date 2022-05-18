@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.0.0
+
+### Breaking changes
+
+- Migrated to the new core library `@animoca/ethereum-contracts`, replacing `@animoca/ethereum-contracts-core`.
+- Moved the old artifacts folders under `artifacts_previous`.
+- Revisited the fusion mechanism.
+
 ## 5.1.0
 
 ### Chores

@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@animoca/ethereum-contracts@^0.0.5-pre.0":
-  version "0.0.5-pre.0"
-  resolved "https://registry.yarnpkg.com/@animoca/ethereum-contracts/-/ethereum-contracts-0.0.5-pre.0.tgz#0ab11b066e1b06cc8d25494294cbd64de3978c65"
-  integrity sha512-70kaQmO+yw+xr3dRBEVbEMKZMXnWGZuF0oNh5BMEdhwJ0n54wGYc+Njo1CmAjxgvzeZZhGVfQDD6OVdpGNwetQ==
+"@animoca/ethereum-contracts@^0.0.5-pre.1":
+  version "0.0.5-pre.1"
+  resolved "https://registry.yarnpkg.com/@animoca/ethereum-contracts/-/ethereum-contracts-0.0.5-pre.1.tgz#093ff57686062ec36d84380520f654d063612db9"
+  integrity sha512-7z1eM5mbtOgoiHQ6PpgM+74h5KESIEPVhr5H8sRklu9ZnYKK41HKj2Nipt9XfOUnHaF0A3C6AiW54qiQ2zVEEg==
 
 "@babel/code-frame@^7.0.0":
   version "7.16.7"
@@ -8592,10 +8592,10 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-"solc-0.8.13@npm:solc@0.8.13":
-  version "0.8.13"
-  resolved "https://registry.yarnpkg.com/solc/-/solc-0.8.13.tgz#bafc7fcc11a627e2281e489076b80497123bb704"
-  integrity sha512-C0yTN+rjEOGO6uVOXI8+EKa75SFMuZpQ2tryex4QxWIg0HRWZvCHKfVPuLZ5wx06Sb6GBp6uQA5yqQyXZnXOJw==
+"solc-0.8.14@npm:solc@0.8.14-fixed":
+  version "0.8.14-fixed"
+  resolved "https://registry.yarnpkg.com/solc/-/solc-0.8.14-fixed.tgz#a730a1e8259ac06313f6b7287df046ebe1dddc13"
+  integrity sha512-jFYa2fKbk95olckuDbhs9kbtaUhLRllM7aC++mLinJBUcdHbaHVM8LxHaJpOIDdnHBV9TpIP4XBybVugqMDyhA==
   dependencies:
     command-exists "^1.2.8"
     commander "^8.1.0"
