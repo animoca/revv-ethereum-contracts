@@ -12,8 +12,8 @@ import {StorageVersion} from "@animoca/ethereum-contracts/contracts/proxy/librar
 library FusionStorage {
     using FusionStorage for FusionStorage.Layout;
 
-    bytes32 public constant FUSION_STORAGE_POSITION = keccak256("animoca.REVVRacing.Fusion.storage");
-    bytes32 public constant FUSION_VERSION_SLOT = keccak256("animoca.REVVRacing.Fusion.version");
+    bytes32 public constant FUSION_STORAGE_POSITION = bytes32(uint256(keccak256("animoca.revvracing.Fusion.storage")) - 1);
+    bytes32 public constant FUSION_VERSION_SLOT = bytes32(uint256(keccak256("animoca.revvracing.Fusion.version")) - 1);
 
     uint256 public constant CHASSIS_MASK = 0xfffffff80000000000000000ff00000000000000000000000000ffff00000000;
 
@@ -74,11 +74,11 @@ library FusionStorage {
     //     Layout storage s,
     //     address cars,
     //     address to,
-    //     uint256[] calldata outputCarMasks
+    //     uint256[] calldata carOutputBaseId
     // ) internal {
-    //     uint256[] memory ids = new uint256[](outputCarMasks.length);
-    //     for (uint256 i; i != outputCarMasks.length; ++i) {
-    //         ids[i] = s._getNextId(outputCarMasks[i]);
+    //     uint256[] memory ids = new uint256[](carOutputBaseId.length);
+    //     for (uint256 i; i != carOutputBaseId.length; ++i) {
+    //         ids[i] = s._getNextId(carOutputBaseId[i]);
     //     }
     //     IERC721Mintable(cars).batchMint(to, ids);
     // }
@@ -102,14 +102,14 @@ library FusionStorage {
         return carOutputBaseId | ++s.chassisNumbers[carOutputBaseId & CHASSIS_MASK];
     }
 
-    // function _getNextIds(Layout storage s, uint256 outputCarMask, uint256 nbIds) internal returns (uint256[] memory) {
-    //     uint256 chassisNumberMask = outputCarMask & CHASSIS_MASK;
-    //     uint256 chassisNumber = s.chassisNumbers[chassisNumberMask];
+    // function _getNextIds(Layout storage s, uint256 carOutputBaseId, uint256 nbIds) internal returns (uint256[] memory) {
+    //     uint256 chassisNumberBaseId = carOutputBaseId & CHASSIS_MASK;
+    //     uint256 chassisNumber = s.chassisNumbers[chassisNumberBaseId];
     //     uint256[] memory ids = new uint256[](nbIds);
     //     for (uint256 i; i != nbIds; ++i) {
     //         ids[i] = ++chassisNumber;
     //     }
-    //     s.chassisNumbers[chassisNumberMask] = chassisNumber;
+    //     s.chassisNumbers[chassisNumberBaseId] = chassisNumber;
     //     return ids;
     // }
 }

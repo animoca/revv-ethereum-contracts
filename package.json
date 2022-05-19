@@ -47,7 +47,7 @@
     "prepack": "run-s clean:artifacts:hard compile clean"
   },
   "devDependencies": {
-    "@animoca/ethereum-contracts": "^0.0.5-pre.1",
+    "@animoca/ethereum-contracts": "^0.0.5-pre.2",
     "@nomiclabs/hardhat-ethers": "^2.0.6",
     "@nomiclabs/hardhat-waffle": "^2.0.3",
     "@openzeppelin/contracts": "=4.6.0",

@@ -8,12 +8,13 @@ import {IERC20Mintable} from "@animoca/ethereum-contracts/contracts/token/ERC20/
 import {IERC20Receiver} from "@animoca/ethereum-contracts/contracts/token/ERC20/interfaces/IERC20Receiver.sol";
 import {InterfaceDetectionStorage} from "@animoca/ethereum-contracts/contracts/introspection/libraries/InterfaceDetectionStorage.sol";
 import {AccessControlStorage} from "@animoca/ethereum-contracts/contracts/access/libraries/AccessControlStorage.sol";
+import {ERC20Receiver} from "@animoca/ethereum-contracts/contracts/token/ERC20/ERC20Receiver.sol";
 import {Ownable} from "@animoca/ethereum-contracts/contracts/access/Ownable.sol";
 import {AccessControl} from "@animoca/ethereum-contracts/contracts/access/AccessControl.sol";
 import {Recoverable} from "@animoca/ethereum-contracts/contracts/security/Recoverable.sol";
 
 /// @title REVV Racing Catalysts Builder which converts SHRD into CATA.
-contract REVVRacingCatalystBuilder is IERC20Receiver, AccessControl, Recoverable {
+contract REVVRacingCatalystBuilder is ERC20Receiver, AccessControl, Recoverable {
     using InterfaceDetectionStorage for InterfaceDetectionStorage.Layout;
     using AccessControlStorage for AccessControlStorage.Layout;
 
@@ -30,7 +31,6 @@ contract REVVRacingCatalystBuilder is IERC20Receiver, AccessControl, Recoverable
         shards = shards_;
         catalysts = catalysts_;
         emit ConversionRateUpdated(0);
-        InterfaceDetectionStorage.layout().setSupportedInterface(type(IERC20Receiver).interfaceId, true);
     }
 
     //==================================================== ERC20Receiver ====================================================//
@@ -53,7 +53,7 @@ contract REVVRacingCatalystBuilder is IERC20Receiver, AccessControl, Recoverable
         shards.burn(value);
         catalysts.mint(from, value / rate);
 
-        return type(IERC20Receiver).interfaceId;
+        return _ERC20_RECEIVED;
     }
 
     //=================================================== CatalystBuilder ===================================================//

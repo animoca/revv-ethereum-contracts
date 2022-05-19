@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@animoca/ethereum-contracts@^0.0.5-pre.1":
-  version "0.0.5-pre.1"
-  resolved "https://registry.yarnpkg.com/@animoca/ethereum-contracts/-/ethereum-contracts-0.0.5-pre.1.tgz#093ff57686062ec36d84380520f654d063612db9"
-  integrity sha512-7z1eM5mbtOgoiHQ6PpgM+74h5KESIEPVhr5H8sRklu9ZnYKK41HKj2Nipt9XfOUnHaF0A3C6AiW54qiQ2zVEEg==
+"@animoca/ethereum-contracts@^0.0.5-pre.2":
+  version "0.0.5-pre.2"
+  resolved "https://registry.yarnpkg.com/@animoca/ethereum-contracts/-/ethereum-contracts-0.0.5-pre.2.tgz#e7a57fdf2cba5b08fe81e5099c9d4bf5083087ab"
+  integrity sha512-cnLAWTfCBYHhQ9UznL5ur5+vF2N3v+DMCQEycs3lXLxnsbFwt03FW+mO1x8IbZu1Jn9iWqO3lPv19iJO3EL8uA==
 
 "@babel/code-frame@^7.0.0":
   version "7.16.7"
