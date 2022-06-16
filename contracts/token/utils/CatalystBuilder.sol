@@ -1,20 +1,21 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.14;
+pragma solidity 0.8.15;
 
 import {IERC20Receiver} from "@animoca/ethereum-contracts/contracts/token/ERC20/interfaces/IERC20Receiver.sol";
 import {IERC20Burnable} from "@animoca/ethereum-contracts/contracts/token/ERC20/interfaces/IERC20Burnable.sol";
 import {IERC20Mintable} from "@animoca/ethereum-contracts/contracts/token/ERC20/interfaces/IERC20Mintable.sol";
 import {IERC20Receiver} from "@animoca/ethereum-contracts/contracts/token/ERC20/interfaces/IERC20Receiver.sol";
+import {ERC20Storage} from "@animoca/ethereum-contracts/contracts/token/ERC20/libraries/ERC20Storage.sol";
 import {InterfaceDetectionStorage} from "@animoca/ethereum-contracts/contracts/introspection/libraries/InterfaceDetectionStorage.sol";
 import {AccessControlStorage} from "@animoca/ethereum-contracts/contracts/access/libraries/AccessControlStorage.sol";
 import {ERC20Receiver} from "@animoca/ethereum-contracts/contracts/token/ERC20/ERC20Receiver.sol";
-import {Ownable} from "@animoca/ethereum-contracts/contracts/access/Ownable.sol";
+import {ContractOwnership} from "@animoca/ethereum-contracts/contracts/access/ContractOwnership.sol";
 import {AccessControl} from "@animoca/ethereum-contracts/contracts/access/AccessControl.sol";
-import {Recoverable} from "@animoca/ethereum-contracts/contracts/security/Recoverable.sol";
+import {TokenRecovery} from "@animoca/ethereum-contracts/contracts/security/TokenRecovery.sol";
 
 /// @title REVV Racing Catalysts Builder which converts SHRD into CATA.
-contract REVVRacingCatalystBuilder is ERC20Receiver, AccessControl, Recoverable {
+contract REVVRacingCatalystBuilder is ERC20Receiver, AccessControl, TokenRecovery {
     using InterfaceDetectionStorage for InterfaceDetectionStorage.Layout;
     using AccessControlStorage for AccessControlStorage.Layout;
 
@@ -27,7 +28,7 @@ contract REVVRacingCatalystBuilder is ERC20Receiver, AccessControl, Recoverable 
 
     event ConversionRateUpdated(uint256 conversionRate);
 
-    constructor(IERC20Burnable shards_, IERC20Mintable catalysts_) Ownable(msg.sender) {
+    constructor(IERC20Burnable shards_, IERC20Mintable catalysts_) ContractOwnership(msg.sender) {
         shards = shards_;
         catalysts = catalysts_;
         emit ConversionRateUpdated(0);
@@ -53,7 +54,7 @@ contract REVVRacingCatalystBuilder is ERC20Receiver, AccessControl, Recoverable 
         shards.burn(value);
         catalysts.mint(from, value / rate);
 
-        return _ERC20_RECEIVED;
+        return ERC20Storage.ERC20_RECEIVED;
     }
 
     //=================================================== CatalystBuilder ===================================================//

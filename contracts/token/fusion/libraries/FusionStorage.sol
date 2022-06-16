@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.14;
+pragma solidity 0.8.15;
 
 import {IERC20} from "@animoca/ethereum-contracts/contracts/token/ERC20/interfaces/IERC20.sol";
 import {IERC20Burnable} from "@animoca/ethereum-contracts/contracts/token/ERC20/interfaces/IERC20Burnable.sol";
@@ -7,23 +7,27 @@ import {IERC721} from "@animoca/ethereum-contracts/contracts/token/ERC721/interf
 import {IERC721BatchTransfer} from "@animoca/ethereum-contracts/contracts/token/ERC721/interfaces/IERC721BatchTransfer.sol";
 import {IERC721Mintable} from "@animoca/ethereum-contracts/contracts/token/ERC721/interfaces/IERC721Mintable.sol";
 import {PayoutWalletStorage} from "@animoca/ethereum-contracts/contracts/payment/libraries/PayoutWalletStorage.sol";
-import {StorageVersion} from "@animoca/ethereum-contracts/contracts/proxy/libraries/StorageVersion.sol";
+import {ProxyInitialization} from "@animoca/ethereum-contracts/contracts/proxy/libraries/ProxyInitialization.sol";
 
 library FusionStorage {
     using FusionStorage for FusionStorage.Layout;
-
-    bytes32 public constant FUSION_STORAGE_POSITION = bytes32(uint256(keccak256("animoca.revvracing.Fusion.storage")) - 1);
-    bytes32 public constant FUSION_VERSION_SLOT = bytes32(uint256(keccak256("animoca.revvracing.Fusion.version")) - 1);
-
-    uint256 public constant CHASSIS_MASK = 0xfffffff80000000000000000ff00000000000000000000000000ffff00000000;
 
     struct Layout {
         mapping(uint256 => uint256) chassisNumbers;
         address yard;
     }
 
+    bytes32 internal constant LAYOUT_STORAGE_SLOT = bytes32(uint256(keccak256("animoca.revvracing.Fusion.storage")) - 1);
+    bytes32 internal constant PROXY_INIT_PHASE_SLOT = bytes32(uint256(keccak256("animoca.revvracing.Fusion.phase")) - 1);
+
+    uint256 internal constant CHASSIS_MASK = 0xfffffff80000000000000000ff00000000000000000000000000ffff00000000;
+
     function init(Layout storage s, address yard) internal {
-        StorageVersion.setVersion(FUSION_VERSION_SLOT, 1);
+        ProxyInitialization.setPhase(PROXY_INIT_PHASE_SLOT, 1);
+        s.yard = yard;
+    }
+
+    function setYard(Layout storage s, address yard) internal {
         s.yard = yard;
     }
 
@@ -32,7 +36,7 @@ library FusionStorage {
         address from,
         uint256 value
     ) internal {
-        IERC20(revv).transferFrom(from, PayoutWalletStorage.layout().payoutWallet, value);
+        IERC20(revv).transferFrom(from, PayoutWalletStorage.layout().wallet, value);
     }
 
     function consumeCATA(
@@ -92,7 +96,7 @@ library FusionStorage {
     }
 
     function layout() internal pure returns (Layout storage s) {
-        bytes32 position = FUSION_STORAGE_POSITION;
+        bytes32 position = LAYOUT_STORAGE_SLOT;
         assembly {
             s.slot := position
         }

@@ -2,7 +2,7 @@ const {ethers} = require('hardhat');
 const {EmptyByte, ZeroAddress} = require('@animoca/ethereum-contracts/src/constants');
 const {getForwarderRegistryAddress} = require('@animoca/ethereum-contracts/test/helpers/run');
 const {loadFixture} = require('@animoca/ethereum-contracts/test/helpers/fixtures');
-const {shouldSupportInterfaces} = require('@animoca/ethereum-contracts/test/behaviors');
+const {supportsInterfaces} = require('@animoca/ethereum-contracts/test/behaviors');
 
 describe('REVVRacingCatalystBuilder', function () {
   let deployer, other;
@@ -74,5 +74,5 @@ describe('REVVRacingCatalystBuilder', function () {
     });
   });
 
-  shouldSupportInterfaces(['IERC20Receiver']);
+  supportsInterfaces(['IERC20Receiver']);
 });
