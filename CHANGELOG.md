@@ -8,6 +8,10 @@
 - Moved the old artifacts folders under `artifacts_previous`.
 - Revisited the fusion mechanism.
 
+### New features
+
+- Added `REVVMotorsportVouchers` contract.
+
 ## 5.1.0
 
 ### Chores

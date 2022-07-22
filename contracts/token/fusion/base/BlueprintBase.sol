@@ -6,6 +6,8 @@ import {IForwarderRegistry} from "@animoca/ethereum-contracts/contracts/metatx/i
 import {ForwarderRegistryContextBase} from "@animoca/ethereum-contracts/contracts/metatx/base/ForwarderRegistryContextBase.sol";
 
 abstract contract BlueprintBase is ForwarderRegistryContextBase {
+    uint256 internal constant CAR_TYPE_MASK = 0xfffffff80000fff000000fffffff000000000000000000000fffffff00000000;
+
     address internal immutable _cars;
     address internal immutable _revv;
     address internal immutable _cata;
@@ -19,5 +21,9 @@ abstract contract BlueprintBase is ForwarderRegistryContextBase {
         _cars = cars;
         _revv = revv;
         _cata = cata;
+    }
+
+    function _enforceIsValidCar(uint256 id, uint256 matchValue) internal pure {
+        require(id & CAR_TYPE_MASK == matchValue, "Fusion: wrong car type");
     }
 }

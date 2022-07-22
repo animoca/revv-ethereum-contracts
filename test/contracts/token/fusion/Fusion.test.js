@@ -1,6 +1,7 @@
 const {ethers} = require('hardhat');
 const {BigNumber, utils} = ethers;
 const {ZeroAddress, MaxUInt256, One} = require('@animoca/ethereum-contracts/src/constants');
+const {deployContract} = require('@animoca/ethereum-contracts/test/helpers/contract');
 const {getDeployerAddress, getForwarderRegistryAddress, runBehaviorTests} = require('@animoca/ethereum-contracts/test/helpers/run');
 const {loadFixture} = require('@animoca/ethereum-contracts/test/helpers/fixtures');
 
@@ -8,105 +9,116 @@ const chassisMask = BigNumber.from('0xfffffff80000000000000000ff0000000000000000
 
 const facet1BlueprintsSingle = [
   {
-    name: 'NAME1',
-    inputCarMatchValue: BigNumber.from('57910179610855898324494532775552547395017963456962744041009983425274905100288'),
-    outputCarBaseId: BigNumber.from('57910179610855898324494532781392852826649382977650253965008245201603429138432'),
+    name: 'Common_Rare_1',
+    inputCarTokenId: BigNumber.from('57910179610855898424928160541739447587297712243704648546123968643847459705108'),
+    outputCarBaseId: BigNumber.from('57910179610855898424928160547579767348767212279596058158364205242864464035840'),
     inputCarRarity: 'common',
     outputCarRarity: 'rare',
-    revvCost: utils.parseEther('150'),
+    revvCost: utils.parseEther('300'),
     catalystCost: utils.parseEther('1'),
   },
   {
-    name: 'NAME2',
-    inputCarMatchValue: BigNumber.from('57910179610855898424928160541739439616390594228285406698647671381124387438592'),
-    outputCarBaseId: BigNumber.from('57910179610855898424928160547579745048022013748972916622645932594502958055424'),
+    name: 'Common_Rare_2',
+    inputCarTokenId: BigNumber.from('57910179610855899830998949268355938686514543042221925753051591581490911133816'),
+    outputCarBaseId: BigNumber.from('57910179610855899830998949274196258447984043078113335365291825084283171635200'),
     inputCarRarity: 'common',
     outputCarRarity: 'rare',
-    revvCost: utils.parseEther('150'),
+    revvCost: utils.parseEther('300'),
     catalystCost: utils.parseEther('1'),
   },
   {
-    name: 'NAME3',
-    inputCarMatchValue: BigNumber.from('57910179610855899830998949268355930715607425026802683905575294318767838855168'),
-    outputCarBaseId: BigNumber.from('57910179610855899830998949274196236147238844547490193829573552435921665654784'),
+    name: 'Common_Rare_3',
+    inputCarTokenId: BigNumber.from('57910179610855900534034343631664184236122958441480564356515403331787613562277'),
+    outputCarBaseId: BigNumber.from('57910179610855900534034343637504503997592458477371973968755635145730013790208'),
     inputCarRarity: 'common',
     outputCarRarity: 'rare',
-    revvCost: utils.parseEther('150'),
+    revvCost: utils.parseEther('300'),
     catalystCost: utils.parseEther('1'),
   },
   {
-    name: 'NAME4',
-    inputCarMatchValue: BigNumber.from('57910179610855900534034343631664176265215840426061322509039106069064541274112'),
-    outputCarBaseId: BigNumber.from('57910179610855900534034343637504481696847259946748832433037362497368507809792'),
+    name: 'Common_Rare_4',
+    inputCarTokenId: BigNumber.from('57910179610855898525361788307926339808670343015027311203761656036746988625526'),
+    outputCarBaseId: BigNumber.from('57910179610855898525361788313766659570139843050918720816001893198713946374144'),
     inputCarRarity: 'common',
     outputCarRarity: 'rare',
-    revvCost: utils.parseEther('150'),
+    revvCost: utils.parseEther('300'),
     catalystCost: utils.parseEther('1'),
   },
   {
-    name: 'NAME5',
-    inputCarMatchValue: BigNumber.from('57910179610855898525361788307926331837763224999608069356285358774023916355584'),
-    outputCarBaseId: BigNumber.from('57910179610855898525361788313766637269394644520295579280283620550352440393728'),
+    name: 'Common_Rare_5',
+    inputCarTokenId: BigNumber.from('57910179610855905053547593110074334644328517894302707960134720762972089634293'),
+    outputCarBaseId: BigNumber.from('57910179610855905053547593115914653512870510684680436650546688775612859940864'),
     inputCarRarity: 'common',
     outputCarRarity: 'rare',
-    revvCost: utils.parseEther('150'),
+    revvCost: utils.parseEther('300'),
     catalystCost: utils.parseEther('1'),
   },
   {
-    name: 'NAME6',
-    inputCarMatchValue: BigNumber.from('57910179610855905053547593110074326226984225135581142102735021016624104734720'),
-    outputCarBaseId: BigNumber.from('57910179610855905053547593115914631212125312154057295114828416127251353960448'),
+    name: 'Common_Rare_6',
+    inputCarTokenId: BigNumber.from('57910179610855905957450243005756364636682194836206671878873907299067849889811'),
+    outputCarBaseId: BigNumber.from('57910179610855905957450243011596683505224187626584400569285873059908806508544'),
     inputCarRarity: 'common',
     outputCarRarity: 'rare',
-    revvCost: utils.parseEther('150'),
+    revvCost: utils.parseEther('300'),
     catalystCost: utils.parseEther('1'),
   },
   {
-    name: 'NAME7',
-    inputCarMatchValue: BigNumber.from('57910179610855905957450243005756356219337902077485106021474207552719864987648'),
-    outputCarBaseId: BigNumber.from('57910179610855905957450243011596661204478989095961259033567600411547300528128'),
+    name: 'Common_Rare_7',
+    inputCarTokenId: BigNumber.from('57910179610855907564388287264746640178644287177369274401076905585460312588221'),
+    outputCarBaseId: BigNumber.from('57910179610855907564388287270586959047186279967747003091488867124176618520576'),
     inputCarRarity: 'common',
     outputCarRarity: 'rare',
-    revvCost: utils.parseEther('150'),
+    revvCost: utils.parseEther('300'),
+    catalystCost: utils.parseEther('1'),
+  },
+  {
+    name: 'Common_Rare_8',
+    inputCarTokenId: BigNumber.from('57910179610855907865689170563307316842762179491337262373989967764158899331839'),
+    outputCarBaseId: BigNumber.from('57910179610855907865689170569147635711304172281714991064401928739925251850240'),
+    inputCarRarity: 'common',
+    outputCarRarity: 'rare',
+    revvCost: utils.parseEther('300'),
+    catalystCost: utils.parseEther('1'),
+  },
+  {
+    name: 'Common_Rare_9',
+    inputCarTokenId: BigNumber.from('57910179610855907966122798329494209064134810262659925031627655157058428242819'),
+    outputCarBaseId: BigNumber.from('57910179610855907966122798335334527932676803053037653722039616132824780767232'),
+    inputCarRarity: 'common',
+    outputCarRarity: 'rare',
+    revvCost: utils.parseEther('300'),
+    catalystCost: utils.parseEther('1'),
+  },
+  {
+    name: 'Common_Rare_10',
+    inputCarTokenId: BigNumber.from('57910179610855908166990053861867993506880071805305250346903029942857486067494'),
+    outputCarBaseId: BigNumber.from('57910179610855908166990053867708312375422064595682979037314990637148861890560'),
+    inputCarRarity: 'common',
+    outputCarRarity: 'rare',
+    revvCost: utils.parseEther('300'),
     catalystCost: utils.parseEther('1'),
   },
 ];
 
 const facet1BlueprintsDuo = [
   {
-    name: 'NAME8',
-    inputCarMatchValue: BigNumber.from('57910179610855907564388287264746631761299994418647708543677205839112327659520'),
-    outputCarBaseId: BigNumber.from('57910179610855907564388287270586936746441081437123861555770594475815112540160'),
+    name: 'Common_Rare_11',
+    inputCarTokenId1: BigNumber.from('57910179610855907564388287264746640178644287177369274401076905585460312588221'),
+    inputCarTokenId2: BigNumber.from('57910179610855907865689170563307316842762179491337262373989967764158899331839'),
+    outputCarBaseId: BigNumber.from('57910179610855916804282041759781043413468310929431967594156082501135328346112'),
     inputCarRarity: 'common',
     outputCarRarity: 'rare',
-    revvCost: utils.parseEther('150'),
+    revvCost: utils.parseEther('300'),
     catalystCost: utils.parseEther('1'),
   },
   {
-    name: 'NAME9',
-    inputCarMatchValue: BigNumber.from('57910179610855907865689170563307308425417886732615696516590268017810914410496'),
-    outputCarBaseId: BigNumber.from('57910179610855907865689170569147613410558973751091849528683656091563745869824'),
+    name: 'Common_Rare_12',
+    inputCarTokenId1: BigNumber.from('57910179610855907966122798329494209064134810262659925031627655157058428242819'),
+    inputCarTokenId2: BigNumber.from('57910179610855908166990053861867993506880071805305250346903029942857486067494'),
+    outputCarBaseId: BigNumber.from('57910179610855916904715669525967935634840941700754630251793769894034857263104'),
     inputCarRarity: 'common',
     outputCarRarity: 'rare',
-    revvCost: utils.parseEther('150'),
-    catalystCost: utils.parseEther('1'),
-  },
-  {
-    name: 'NAME10',
-    inputCarMatchValue: BigNumber.from('57910179610855907966122798329494200646790517503938359174227955410710443327488'),
-    outputCarBaseId: BigNumber.from('57910179610855907966122798335334505631931604522414512186321343484463274786816'),
-    inputCarRarity: 'common',
-    outputCarRarity: 'rare',
-    revvCost: utils.parseEther('150'),
-    catalystCost: utils.parseEther('1'),
-  },
-  {
-    name: 'NAME11',
-    inputCarMatchValue: BigNumber.from('57910179610855908166990053861867985089535779046583684489503330196509501161472'),
-    outputCarBaseId: BigNumber.from('57910179610855908166990053867708290074676866065059837501596717988787355910144'),
-    inputCarRarity: 'common',
-    outputCarRarity: 'rare',
-    revvCost: utils.parseEther('150'),
+    revvCost: utils.parseEther('300'),
     catalystCost: utils.parseEther('1'),
   },
 ];
@@ -117,7 +129,7 @@ const defaultCar2 = BigNumber.from('0xff0000000000000000000000000000000000000000
 const config = {
   diamond: {
     facets: [
-      {name: 'ProxyAdminFacetMock', ctorArguments: ['forwarderRegistry'], init: {method: 'initProxyAdminStorage', arguments: ['initialAdmin']}},
+      {name: 'ProxyAdminFacet', ctorArguments: ['forwarderRegistry'], init: {method: 'initProxyAdminStorage', arguments: ['initialAdmin']}},
       {name: 'DiamondCutFacet', ctorArguments: ['forwarderRegistry'], init: {method: 'initDiamondCutStorage'}},
       {name: 'InterfaceDetectionFacet'},
       {
@@ -163,18 +175,12 @@ runBehaviorTests('Fusion', config, function (deployFn) {
   const fixture = async function () {
     const forwarderRegistryAddress = await getForwarderRegistryAddress();
 
-    const REVVRacingInventory = await ethers.getContractFactory('REVVRacingInventory');
-    this.cars = await REVVRacingInventory.deploy(forwarderRegistryAddress, ZeroAddress);
-    await this.cars.deployed();
+    this.cars = await deployContract('REVVRacingInventory', forwarderRegistryAddress, ZeroAddress);
     await this.cars.batchMint(participant.address, [defaultCar1, defaultCar2]);
 
-    const REVV = await ethers.getContractFactory('ERC20Mock');
-    this.revv = await REVV.deploy([participant.address], [MaxUInt256], '', '', '18', '', forwarderRegistryAddress);
-    await this.revv.deployed();
+    this.revv = await deployContract('ERC20Mock', [participant.address], [MaxUInt256], '', '', '18', '', forwarderRegistryAddress);
 
-    const REVVRacingCatalyst = await ethers.getContractFactory('REVVRacingCatalystMock');
-    this.cata = await REVVRacingCatalyst.deploy([participant.address], [MaxUInt256], forwarderRegistryAddress);
-    await this.cata.deployed();
+    this.cata = await deployContract('REVVRacingCatalystMock', [participant.address], [MaxUInt256], forwarderRegistryAddress);
 
     this.contract = await deployFn({
       payoutWallet: payoutWallet.address,
@@ -222,8 +228,8 @@ runBehaviorTests('Fusion', config, function (deployFn) {
 
         context('when successful', function () {
           beforeEach(async function () {
-            await this.cars.mint(participant.address, blueprint.inputCarMatchValue);
-            this.receipt = await this.contract.connect(participant)[method](blueprint.inputCarMatchValue);
+            await this.cars.mint(participant.address, blueprint.inputCarTokenId);
+            this.receipt = await this.contract.connect(participant)[method](blueprint.inputCarTokenId);
           });
 
           it('burns the catalysts', async function () {
@@ -237,7 +243,7 @@ runBehaviorTests('Fusion', config, function (deployFn) {
           it('moves the spent car to the yard', async function () {
             await expect(this.receipt)
               .to.emit(this.cars, 'TransferSingle')
-              .withArgs(this.contract.address, participant.address, yard.address, blueprint.inputCarMatchValue, 1);
+              .withArgs(this.contract.address, participant.address, yard.address, blueprint.inputCarTokenId, 1);
           });
 
           it('mints the new car to the owner', async function () {
@@ -263,12 +269,9 @@ runBehaviorTests('Fusion', config, function (deployFn) {
         });
 
         context('when successful', function () {
-          const car1 = blueprint.inputCarMatchValue;
-          const car2 = blueprint.inputCarMatchValue.add(One);
-
           beforeEach(async function () {
-            await this.cars.batchMint(participant.address, [car1, car2]);
-            this.receipt = await this.contract.connect(participant)[method](car1, car2);
+            await this.cars.batchMint(participant.address, [blueprint.inputCarTokenId1, blueprint.inputCarTokenId2]);
+            this.receipt = await this.contract.connect(participant)[method](blueprint.inputCarTokenId1, blueprint.inputCarTokenId2);
           });
 
           it('burns the catalysts', async function () {
@@ -282,7 +285,7 @@ runBehaviorTests('Fusion', config, function (deployFn) {
           it('moves the spent cars to the yard', async function () {
             await expect(this.receipt)
               .to.emit(this.cars, 'TransferBatch')
-              .withArgs(this.contract.address, participant.address, yard.address, [car1, car2], [1, 1]);
+              .withArgs(this.contract.address, participant.address, yard.address, [blueprint.inputCarTokenId1, blueprint.inputCarTokenId2], [1, 1]);
           });
 
           it('mints the new car to the owner', async function () {

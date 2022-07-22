@@ -11,6 +11,7 @@ import {ProxyInitialization} from "@animoca/ethereum-contracts/contracts/proxy/l
 
 library FusionStorage {
     using FusionStorage for FusionStorage.Layout;
+    using PayoutWalletStorage for PayoutWalletStorage.Layout;
 
     struct Layout {
         mapping(uint256 => uint256) chassisNumbers;
@@ -36,7 +37,7 @@ library FusionStorage {
         address from,
         uint256 value
     ) internal {
-        IERC20(revv).transferFrom(from, PayoutWalletStorage.layout().wallet, value);
+        IERC20(revv).transferFrom(from, PayoutWalletStorage.layout().payoutWallet(), value);
     }
 
     function consumeCATA(
@@ -71,28 +72,11 @@ library FusionStorage {
         address to,
         uint256 carOutputBaseId
     ) internal {
-        IERC721Mintable(cars).mint(to, s._getNextId(carOutputBaseId));
+        IERC721Mintable(cars).mint(to, s.getNextId(carOutputBaseId));
     }
 
-    // function batchCreateCars(
-    //     Layout storage s,
-    //     address cars,
-    //     address to,
-    //     uint256[] calldata carOutputBaseId
-    // ) internal {
-    //     uint256[] memory ids = new uint256[](carOutputBaseId.length);
-    //     for (uint256 i; i != carOutputBaseId.length; ++i) {
-    //         ids[i] = s._getNextId(carOutputBaseId[i]);
-    //     }
-    //     IERC721Mintable(cars).batchMint(to, ids);
-    // }
-
-    function enforceIsValidCar(
-        uint256 id,
-        uint256 mask,
-        uint256 matchValue
-    ) internal pure {
-        require(id & mask == matchValue, "Fusion: wrong car type");
+    function getNextId(Layout storage s, uint256 carOutputBaseId) internal returns (uint256) {
+        return carOutputBaseId | ++s.chassisNumbers[carOutputBaseId & CHASSIS_MASK];
     }
 
     function layout() internal pure returns (Layout storage s) {
@@ -101,19 +85,4 @@ library FusionStorage {
             s.slot := position
         }
     }
-
-    function _getNextId(Layout storage s, uint256 carOutputBaseId) internal returns (uint256) {
-        return carOutputBaseId | ++s.chassisNumbers[carOutputBaseId & CHASSIS_MASK];
-    }
-
-    // function _getNextIds(Layout storage s, uint256 carOutputBaseId, uint256 nbIds) internal returns (uint256[] memory) {
-    //     uint256 chassisNumberBaseId = carOutputBaseId & CHASSIS_MASK;
-    //     uint256 chassisNumber = s.chassisNumbers[chassisNumberBaseId];
-    //     uint256[] memory ids = new uint256[](nbIds);
-    //     for (uint256 i; i != nbIds; ++i) {
-    //         ids[i] = ++chassisNumber;
-    //     }
-    //     s.chassisNumbers[chassisNumberBaseId] = chassisNumber;
-    //     return ids;
-    // }
 }
