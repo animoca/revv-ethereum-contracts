@@ -46,7 +46,7 @@
     "prepack": "run-s clean:artifacts:hard compile clean"
   },
   "devDependencies": {
-    "@animoca/ethereum-contracts": "^0.1.0-rc.18",
+    "@animoca/ethereum-contracts": "^0.1.0-rc.19",
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.2",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.3",
     "@nomiclabs/hardhat-ethers": "^2.1.0",
