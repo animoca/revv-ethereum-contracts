@@ -11,6 +11,9 @@
 ### New features
 
 - Added `REVVMotorsportVouchers` contract.
+- Added `REVVMotorsportShard` contract.
+- Added `REVVRacingCatalyst` contract.
+- Added `REVVRacingNFT` contract.
 
 ## 5.1.0
 

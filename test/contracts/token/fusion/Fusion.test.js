@@ -175,12 +175,15 @@ runBehaviorTests('Fusion', config, function (deployFn) {
   const fixture = async function () {
     const forwarderRegistryAddress = await getForwarderRegistryAddress();
 
-    this.cars = await deployContract('REVVRacingInventory', forwarderRegistryAddress, ZeroAddress);
+    this.cars = await deployContract('ERC721BurnableMock', '', '', '', forwarderRegistryAddress);
+    await this.cars.grantRole(await this.cars.MINTER_ROLE(), deployer.address);
     await this.cars.batchMint(participant.address, [defaultCar1, defaultCar2]);
 
     this.revv = await deployContract('ERC20Mock', [participant.address], [MaxUInt256], '', '', '18', '', forwarderRegistryAddress);
 
-    this.cata = await deployContract('REVVRacingCatalystMock', [participant.address], [MaxUInt256], forwarderRegistryAddress);
+    this.cata = await deployContract('REVVRacingCatalystMock', forwarderRegistryAddress);
+    await this.cata.grantRole(await this.cata.MINTER_ROLE(), deployer.address);
+    this.cata.mint(participant.address, MaxUInt256);
 
     this.contract = await deployFn({
       payoutWallet: payoutWallet.address,
@@ -194,7 +197,7 @@ runBehaviorTests('Fusion', config, function (deployFn) {
     await this.revv.connect(participant).approve(this.contract.address, MaxUInt256);
     await this.cata.connect(participant).approve(this.contract.address, MaxUInt256);
 
-    await this.cars.addMinter(this.contract.address);
+    await this.cars.grantRole(await this.cars.MINTER_ROLE(), this.contract.address);
   };
 
   beforeEach(async function () {
@@ -241,15 +244,11 @@ runBehaviorTests('Fusion', config, function (deployFn) {
           });
 
           it('moves the spent car to the yard', async function () {
-            await expect(this.receipt)
-              .to.emit(this.cars, 'TransferSingle')
-              .withArgs(this.contract.address, participant.address, yard.address, blueprint.inputCarTokenId, 1);
+            await expect(this.receipt).to.emit(this.cars, 'Transfer').withArgs(participant.address, yard.address, blueprint.inputCarTokenId);
           });
 
           it('mints the new car to the owner', async function () {
-            await expect(this.receipt)
-              .to.emit(this.cars, 'TransferSingle')
-              .withArgs(this.contract.address, ZeroAddress, participant.address, blueprint.outputCarBaseId.add(One), 1);
+            await expect(this.receipt).to.emit(this.cars, 'Transfer').withArgs(ZeroAddress, participant.address, blueprint.outputCarBaseId.add(One));
           });
 
           it('increases the chassis number', async function () {
@@ -283,15 +282,12 @@ runBehaviorTests('Fusion', config, function (deployFn) {
           });
 
           it('moves the spent cars to the yard', async function () {
-            await expect(this.receipt)
-              .to.emit(this.cars, 'TransferBatch')
-              .withArgs(this.contract.address, participant.address, yard.address, [blueprint.inputCarTokenId1, blueprint.inputCarTokenId2], [1, 1]);
+            await expect(this.receipt).to.emit(this.cars, 'Transfer').withArgs(participant.address, yard.address, blueprint.inputCarTokenId1);
+            await expect(this.receipt).to.emit(this.cars, 'Transfer').withArgs(participant.address, yard.address, blueprint.inputCarTokenId2);
           });
 
           it('mints the new car to the owner', async function () {
-            await expect(this.receipt)
-              .to.emit(this.cars, 'TransferSingle')
-              .withArgs(this.contract.address, ZeroAddress, participant.address, blueprint.outputCarBaseId.add(One), 1);
+            await expect(this.receipt).to.emit(this.cars, 'Transfer').withArgs(ZeroAddress, participant.address, blueprint.outputCarBaseId.add(One));
           });
 
           it('increases the chassis number', async function () {

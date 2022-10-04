@@ -2,6 +2,7 @@ const {ethers} = require('hardhat');
 const {EmptyByte, ZeroAddress} = require('@animoca/ethereum-contracts/src/constants');
 const {getForwarderRegistryAddress} = require('@animoca/ethereum-contracts/test/helpers/run');
 const {loadFixture} = require('@animoca/ethereum-contracts/test/helpers/fixtures');
+const {deployContract} = require('@animoca/ethereum-contracts/test/helpers/contract');
 const {supportsInterfaces} = require('@animoca/ethereum-contracts/test/behaviors');
 
 describe('REVVRacingCatalystBuilder', function () {
@@ -14,21 +15,13 @@ describe('REVVRacingCatalystBuilder', function () {
   const fixture = async function () {
     const forwarderRegistryAddress = await getForwarderRegistryAddress();
 
-    const REVVMotorsportShard = await ethers.getContractFactory('REVVMotorsportShard');
-    this.shards = await REVVMotorsportShard.deploy(forwarderRegistryAddress);
-    this.shards.deployed();
+    this.shards = await deployContract('REVVMotorsportShard', forwarderRegistryAddress);
+    this.catalysts = await deployContract('REVVRacingCatalyst', forwarderRegistryAddress);
+    this.contract = await deployContract('REVVRacingCatalystBuilder', this.shards.address, this.catalysts.address);
 
-    const REVVRacingCatalyst = await ethers.getContractFactory('REVVRacingCatalyst');
-    this.catalysts = await REVVRacingCatalyst.deploy(forwarderRegistryAddress);
-    this.catalysts.deployed();
-
-    const REVVRacingCatalystBuilder = await ethers.getContractFactory('REVVRacingCatalystBuilder');
-    this.contract = await REVVRacingCatalystBuilder.deploy(this.shards.address, this.catalysts.address);
-    this.contract.deployed();
-
-    this.contract.grantRole(await this.contract.RATE_MANAGER_ROLE(), deployer.address);
-
-    await this.catalysts.addMinter(this.contract.address);
+    await this.contract.grantRole(await this.contract.RATE_MANAGER_ROLE(), deployer.address);
+    await this.shards.grantRole(await this.shards.MINTER_ROLE(), deployer.address);
+    await this.catalysts.grantRole(await this.catalysts.MINTER_ROLE(), this.contract.address);
   };
 
   beforeEach(async function () {
