@@ -1,6 +1,9 @@
 node_modules/
 .npmrc*
 
+.yalc
+yalc.lock
+
 .vscode/*
 !.vscode/settings.json.default
 !.vscode/launch.json.default
@@ -10,22 +13,21 @@ node_modules/
 !.env.example
 
 cache/
-artifacts/*
-!artifacts/build-info/
-!artifacts/contracts/
 
-coverage*
-.coverage*
-smartcheck*
+artifacts/*
+!artifacts/contracts/
+!artifacts/build-info/
+
+coverage/
+coverage.json
+*.coverage/
+
 flattened*
 docs/
-gas-report.md
+gas-report*
 
 deployments/hardhat*
 deployments/localhost*
-
-exports/localhost*
-exports/hardhat*
 
 generated/localhost*
 generated/hardhat*
