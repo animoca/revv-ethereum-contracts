@@ -1,6 +1,6 @@
 {
   "name": "@animoca/revv-ethereum-contracts",
-  "version": "6.0.0-rc.5",
+  "version": "6.0.0-rc.6",
   "description": "REVV Solidity Contracts",
   "author": "Animoca Brands",
   "license": "MIT",
@@ -46,7 +46,7 @@
     "prepack": "run-s clean:artifacts:hard compile clean"
   },
   "devDependencies": {
-    "@animoca/ethereum-contracts": "^0.1.0",
+    "@animoca/ethereum-contracts": "=0.2.0-rc0",
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.3",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.6",
     "@nomiclabs/hardhat-ethers": "^2.1.1",
@@ -62,7 +62,7 @@
     "fs-extra": "^10.1.0",
     "glob": "^8.0.3",
     "hardhat": "^2.11.2",
-    "hardhat-deploy": "^0.11.15",
+    "hardhat-deploy": "^0.11.16",
     "hardhat-deploy-ethers": "^0.3.0-beta.13",
     "hardhat-gas-reporter": "^1.0.9",
     "lodash.clonedeep": "^4.5.0",

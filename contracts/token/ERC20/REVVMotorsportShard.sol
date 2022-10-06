@@ -5,5 +5,5 @@ import {IForwarderRegistry} from "@animoca/ethereum-contracts/contracts/metatx/i
 import {ERC20MintBurn} from "./ERC20MintBurn.sol";
 
 contract REVVMotorsportShard is ERC20MintBurn {
-    constructor(IForwarderRegistry forwarderRegistry) ERC20MintBurn("REVV Motorsport Shard", "SHRD", 18, "", forwarderRegistry) {}
+    constructor(IForwarderRegistry forwarderRegistry) ERC20MintBurn("REVV Motorsport Shard", "SHRD", 18, forwarderRegistry) {}
 }

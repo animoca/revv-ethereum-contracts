@@ -32,12 +32,11 @@ contract ERC20MintBurn is
         string memory tokenName,
         string memory tokenSymbol,
         uint8 tokenDecimals,
-        string memory uri,
         IForwarderRegistry forwarderRegistry
     )
-        ERC20(new address[](0), new uint256[](0))
+        ERC20()
         ERC20Detailed(tokenName, tokenSymbol, tokenDecimals)
-        ERC20Metadata(uri)
+        ERC20Metadata()
         ForwarderRegistryContext(forwarderRegistry)
         ContractOwnership(msg.sender)
     {}

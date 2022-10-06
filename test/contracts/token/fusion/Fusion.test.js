@@ -175,11 +175,13 @@ runBehaviorTests('Fusion', config, function (deployFn) {
   const fixture = async function () {
     const forwarderRegistryAddress = await getForwarderRegistryAddress();
 
-    this.cars = await deployContract('ERC721BurnableMock', '', '', '', forwarderRegistryAddress);
+    this.cars = await deployContract('ERC721BurnableMock', '', '', forwarderRegistryAddress);
     await this.cars.grantRole(await this.cars.MINTER_ROLE(), deployer.address);
     await this.cars.batchMint(participant.address, [defaultCar1, defaultCar2]);
 
-    this.revv = await deployContract('ERC20Mock', [participant.address], [MaxUInt256], '', '', '18', '', forwarderRegistryAddress);
+    this.revv = await deployContract('ERC20Mock', '', '', 18, forwarderRegistryAddress);
+    await this.revv.grantRole(await this.revv.MINTER_ROLE(), deployer.address);
+    await this.revv.mint(participant.address, MaxUInt256);
 
     this.cata = await deployContract('REVVRacingCatalystMock', forwarderRegistryAddress);
     await this.cata.grantRole(await this.cata.MINTER_ROLE(), deployer.address);

@@ -25,7 +25,7 @@ contract REVVRacingNFT is
     ForwarderRegistryContext
 {
     constructor(IForwarderRegistry forwarderRegistry)
-        ERC721MetadataWithBaseURI("REVV Racing NFT", "RR", "")
+        ERC721MetadataWithBaseURI("REVV Racing NFT", "RR")
         ContractOwnership(msg.sender)
         ForwarderRegistryContext(forwarderRegistry)
     {}

@@ -4,14 +4,12 @@ const {getForwarderRegistryAddress, runBehaviorTests} = require('@animoca/ethere
 const baseMetadataURI = 'uri';
 
 const config = {
-  proxied: {
+  immutable: {
     name: 'REVVMotorsportVouchersMock',
     ctorArguments: ['forwarderRegistry'],
-    init: {method: 'init', arguments: ['baseMetadataURI']},
     testMsgData: true,
   },
   defaultArguments: {
-    baseMetadataURI,
     forwarderRegistry: getForwarderRegistryAddress,
   },
 };
