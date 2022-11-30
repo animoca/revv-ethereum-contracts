@@ -40,12 +40,7 @@ contract REVVRacingCatalystBuilder is ERC20Receiver, AccessControl, TokenRecover
     /// @dev Reverts if the sender is not the shards contract.
     /// @dev Reverts if the conversion rate is currently set to zero.
     /// @inheritdoc IERC20Receiver
-    function onERC20Received(
-        address, /*sender,*/
-        address from,
-        uint256 value,
-        bytes memory /*data*/
-    ) public virtual override returns (bytes4) {
+    function onERC20Received(address /*sender,*/, address from, uint256 value, bytes memory /*data*/) public virtual override returns (bytes4) {
         require(msg.sender == address(shards), "CatalystBuilder: wrong sender");
 
         uint256 rate = conversionRate;

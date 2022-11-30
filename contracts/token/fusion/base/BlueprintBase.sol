@@ -12,12 +12,7 @@ abstract contract BlueprintBase is ForwarderRegistryContextBase {
     address internal immutable _revv;
     address internal immutable _cata;
 
-    constructor(
-        address cars,
-        address revv,
-        address cata,
-        IForwarderRegistry forwarderRegistry
-    ) ForwarderRegistryContextBase(forwarderRegistry) {
+    constructor(address cars, address revv, address cata, IForwarderRegistry forwarderRegistry) ForwarderRegistryContextBase(forwarderRegistry) {
         _cars = cars;
         _revv = revv;
         _cata = cata;

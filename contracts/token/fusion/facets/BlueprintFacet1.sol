@@ -9,12 +9,7 @@ import {BlueprintBase} from "./../base/BlueprintBase.sol";
 contract BlueprintFacet1 is BlueprintBase {
     using FusionStorage for FusionStorage.Layout;
 
-    constructor(
-        address cars,
-        address revv,
-        address cata,
-        IForwarderRegistry forwarderRegistry
-    ) BlueprintBase(cars, revv, cata, forwarderRegistry) {}
+    constructor(address cars, address revv, address cata, IForwarderRegistry forwarderRegistry) BlueprintBase(cars, revv, cata, forwarderRegistry) {}
 
     // solhint-disable-next-line func-name-mixedcase
     function fuse_Common_Rare_1(uint256 id) external {
@@ -148,13 +143,7 @@ contract BlueprintFacet1 is BlueprintBase {
         _fuseMultiple(carInputMatchValues, 57910179610855916904715669525967935634840941700754630251793769894034857263104, ids, 300 ether, 1 ether);
     }
 
-    function _fuseOne(
-        uint256 carInputMatchValue,
-        uint256 carOutputBaseId,
-        uint256 id,
-        uint256 revvAmount,
-        uint256 cataAmount
-    ) internal {
+    function _fuseOne(uint256 carInputMatchValue, uint256 carOutputBaseId, uint256 id, uint256 revvAmount, uint256 cataAmount) internal {
         address sender = _msgSender();
         _enforceIsValidCar(id, carInputMatchValue);
         FusionStorage.consumeREVV(_revv, sender, revvAmount);

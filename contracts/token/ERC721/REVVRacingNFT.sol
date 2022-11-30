@@ -24,11 +24,9 @@ contract REVVRacingNFT is
     TokenRecovery,
     ForwarderRegistryContext
 {
-    constructor(IForwarderRegistry forwarderRegistry)
-        ERC721MetadataWithBaseURI("REVV Racing NFT", "RR")
-        ContractOwnership(msg.sender)
-        ForwarderRegistryContext(forwarderRegistry)
-    {}
+    constructor(
+        IForwarderRegistry forwarderRegistry
+    ) ERC721MetadataWithBaseURI("REVV Racing NFT", "RR") ContractOwnership(msg.sender) ForwarderRegistryContext(forwarderRegistry) {}
 
     /// @inheritdoc ForwarderRegistryContextBase
     function _msgSender() internal view virtual override(Context, ForwarderRegistryContextBase) returns (address) {

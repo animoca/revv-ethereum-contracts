@@ -32,46 +32,23 @@ library FusionStorage {
         s.yard = yard;
     }
 
-    function consumeREVV(
-        address revv,
-        address from,
-        uint256 value
-    ) internal {
+    function consumeREVV(address revv, address from, uint256 value) internal {
         IERC20(revv).transferFrom(from, PayoutWalletStorage.layout().payoutWallet(), value);
     }
 
-    function consumeCATA(
-        address cata,
-        address from,
-        uint256 value
-    ) internal {
+    function consumeCATA(address cata, address from, uint256 value) internal {
         IERC20Burnable(cata).burnFrom(from, value);
     }
 
-    function consumeCar(
-        Layout storage s,
-        address cars,
-        address from,
-        uint256 id
-    ) internal {
+    function consumeCar(Layout storage s, address cars, address from, uint256 id) internal {
         IERC721(cars).transferFrom(from, s.yard, id);
     }
 
-    function batchConsumeCars(
-        Layout storage s,
-        address cars,
-        address from,
-        uint256[] memory ids
-    ) internal {
+    function batchConsumeCars(Layout storage s, address cars, address from, uint256[] memory ids) internal {
         IERC721BatchTransfer(cars).batchTransferFrom(from, s.yard, ids);
     }
 
-    function createCar(
-        Layout storage s,
-        address cars,
-        address to,
-        uint256 carOutputBaseId
-    ) internal {
+    function createCar(Layout storage s, address cars, address to, uint256 carOutputBaseId) internal {
         IERC721Mintable(cars).mint(to, s.getNextId(carOutputBaseId));
     }
 

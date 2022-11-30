@@ -22,7 +22,9 @@ contract REVVMotorsportVouchers is
     TokenRecovery,
     ForwarderRegistryContext
 {
-    constructor(IForwarderRegistry forwarderRegistry)
+    constructor(
+        IForwarderRegistry forwarderRegistry
+    )
         ERC1155()
         ERC1155MetadataURIWithBaseURI()
         ERC1155Mintable()
