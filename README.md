@@ -6,9 +6,9 @@ This project contains the solidity contracts for the REVV project.
 
 ## Audits
 
-| Date | Scope | Commit | Package version | Auditor | Report |
-| ---- | ----- | ------ | --------------- | ------- | ------ |
-| - | - | - | - | - | - |
+| Date       | Scope                                    | Commit                                                                                                                                       | Package version                                                                 | Auditor                                | Report                                                                                                                      |
+| ---------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| 14/11/2022 | REVVMotorsportShard & REVVRacingCatalyst | [0ffc859794d3cd70928559fa03e48aeea8d7c36b](https://github.com/animoca/revv-ethereum-contracts/tree/0ffc859794d3cd70928559fa03e48aeea8d7c36b) | [0.1.2](https://www.npmjs.com/package/@animoca/revv-ethereum-contracts/v/0.1.2) | [Halborn](https://https://halborn.com) | [link](/audit/Animoca_SHRD_CATA_ERC20_Tokens_Polygon_ERC20_Bridging_Smart_Contract_Security_Audit_Report_Halborn_Final.pdf) |
 
 ## Solidity contracts
 
