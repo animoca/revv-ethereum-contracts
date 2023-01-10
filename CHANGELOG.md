@@ -1,5 +1,16 @@
 # Changelog
 
+## 6.0.1
+
+### Bugfixes
+
+- Fixed bugs when using yarn v2 or above.
+
+### Improvements
+
+- Do not include audit reports in the node package.
+- Updated to latest dependencies.
+
 ## 6.0.0
 
 ### Breaking changes
