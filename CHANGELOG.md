@@ -1,5 +1,12 @@
 # Changelog
 
+## 6.1.0
+
+### Improvements
+
+- Update to latest dependencies.
+- Fix versioning rules.
+
 ## 6.0.1
 
 ### Bugfixes

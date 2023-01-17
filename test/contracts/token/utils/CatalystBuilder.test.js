@@ -1,8 +1,8 @@
 const {ethers} = require('hardhat');
-const {EmptyByte, ZeroAddress} = require('@animoca/ethereum-contracts/src/constants');
-const {getForwarderRegistryAddress} = require('@animoca/ethereum-contracts/test/helpers/run');
-const {loadFixture} = require('@animoca/ethereum-contracts/test/helpers/fixtures');
-const {deployContract} = require('@animoca/ethereum-contracts/test/helpers/contract');
+const {constants} = ethers;
+const {loadFixture} = require('@animoca/ethereum-contract-helpers/src/test/fixtures');
+const {deployContract} = require('@animoca/ethereum-contract-helpers/src/test/deploy');
+const {getForwarderRegistryAddress} = require('@animoca/ethereum-contracts/test/helpers/registries');
 const {supportsInterfaces} = require('@animoca/ethereum-contracts/test/behaviors');
 
 describe('REVVRacingCatalystBuilder', function () {
@@ -30,11 +30,13 @@ describe('REVVRacingCatalystBuilder', function () {
 
   describe('onERC20Received()', function () {
     it('reverts if not sent by the shards contract', async function () {
-      await expect(this.contract.onERC20Received(ZeroAddress, ZeroAddress, 0, EmptyByte)).to.be.revertedWith('CatalystBuilder: wrong sender');
+      await expect(this.contract.onERC20Received(constants.AddressZero, constants.AddressZero, 0, '0x')).to.be.revertedWith(
+        'CatalystBuilder: wrong sender'
+      );
     });
 
     it('reverts if the conversion rate has not been set', async function () {
-      await expect(this.shards.safeTransfer(this.contract.address, 0, EmptyByte)).to.be.revertedWith('CatalystBuilder: rate not set');
+      await expect(this.shards.safeTransfer(this.contract.address, 0, '0x')).to.be.revertedWith('CatalystBuilder: rate not set');
     });
 
     context('when successful', function () {
@@ -42,15 +44,15 @@ describe('REVVRacingCatalystBuilder', function () {
       beforeEach(async function () {
         await this.contract.setConversionRate(1);
         await this.shards.mint(deployer.address, amount);
-        this.receipt = await this.shards.safeTransfer(this.contract.address, amount, EmptyByte);
+        this.receipt = await this.shards.safeTransfer(this.contract.address, amount, '0x');
       });
 
       it('burns the shards', async function () {
-        await expect(this.receipt).to.emit(this.shards, 'Transfer').withArgs(this.contract.address, ZeroAddress, amount);
+        await expect(this.receipt).to.emit(this.shards, 'Transfer').withArgs(this.contract.address, constants.AddressZero, amount);
       });
 
       it('mints the catalysts', async function () {
-        await expect(this.receipt).to.emit(this.catalysts, 'Transfer').withArgs(ZeroAddress, deployer.address, amount);
+        await expect(this.receipt).to.emit(this.catalysts, 'Transfer').withArgs(constants.AddressZero, deployer.address, amount);
       });
     });
   });
