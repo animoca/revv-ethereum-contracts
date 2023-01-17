@@ -1,9 +1,10 @@
 const {ethers} = require('hardhat');
-const {BigNumber, utils} = ethers;
-const {ZeroAddress, MaxUInt256, One} = require('@animoca/ethereum-contracts/src/constants');
-const {deployContract} = require('@animoca/ethereum-contracts/test/helpers/contract');
-const {getDeployerAddress, getForwarderRegistryAddress, runBehaviorTests} = require('@animoca/ethereum-contracts/test/helpers/run');
-const {loadFixture} = require('@animoca/ethereum-contracts/test/helpers/fixtures');
+const {BigNumber, constants, utils} = ethers;
+const {deployContract} = require('@animoca/ethereum-contract-helpers/src/test/deploy');
+const {loadFixture} = require('@animoca/ethereum-contract-helpers/src/test/fixtures');
+const {runBehaviorTests} = require('@animoca/ethereum-contract-helpers/src/test/run');
+const {getDeployerAddress} = require('@animoca/ethereum-contract-helpers/src/test/accounts');
+const {getForwarderRegistryAddress} = require('@animoca/ethereum-contracts/test/helpers/registries');
 
 const chassisMask = BigNumber.from('0xfffffff80000000000000000ff00000000000000000000000000ffff00000000');
 
@@ -159,9 +160,9 @@ const config = {
     initialOwner: getDeployerAddress,
     payoutWallet: getDeployerAddress,
     yard: getDeployerAddress,
-    cars: ZeroAddress,
-    revv: ZeroAddress,
-    cata: ZeroAddress,
+    cars: constants.AddressZero,
+    revv: constants.AddressZero,
+    cata: constants.AddressZero,
   },
 };
 
@@ -181,11 +182,11 @@ runBehaviorTests('Fusion', config, function (deployFn) {
 
     this.revv = await deployContract('ERC20Mock', '', '', 18, forwarderRegistryAddress);
     await this.revv.grantRole(await this.revv.MINTER_ROLE(), deployer.address);
-    await this.revv.mint(participant.address, MaxUInt256);
+    await this.revv.mint(participant.address, constants.MaxUint256);
 
     this.cata = await deployContract('REVVRacingCatalystMock', forwarderRegistryAddress);
     await this.cata.grantRole(await this.cata.MINTER_ROLE(), deployer.address);
-    this.cata.mint(participant.address, MaxUInt256);
+    this.cata.mint(participant.address, constants.MaxUint256);
 
     this.contract = await deployFn({
       payoutWallet: payoutWallet.address,
@@ -196,8 +197,8 @@ runBehaviorTests('Fusion', config, function (deployFn) {
     });
 
     await this.cars.connect(participant).setApprovalForAll(this.contract.address, true);
-    await this.revv.connect(participant).approve(this.contract.address, MaxUInt256);
-    await this.cata.connect(participant).approve(this.contract.address, MaxUInt256);
+    await this.revv.connect(participant).approve(this.contract.address, constants.MaxUint256);
+    await this.cata.connect(participant).approve(this.contract.address, constants.MaxUint256);
 
     await this.cars.grantRole(await this.cars.MINTER_ROLE(), this.contract.address);
   };
@@ -213,12 +214,12 @@ runBehaviorTests('Fusion', config, function (deployFn) {
 
     describe('setYard(address)', function () {
       it('reverts if not sent by the contract owner', async function () {
-        await expect(this.contract.connect(other).setYard(ZeroAddress)).to.be.revertedWith('Ownership: not the owner');
+        await expect(this.contract.connect(other).setYard(constants.AddressZero)).to.be.revertedWith('Ownership: not the owner');
       });
 
       it('sets the yard', async function () {
-        await this.contract.setYard(ZeroAddress);
-        expect(await this.contract.yard()).to.equal(ZeroAddress);
+        await this.contract.setYard(constants.AddressZero);
+        expect(await this.contract.yard()).to.equal(constants.AddressZero);
       });
     });
   });
@@ -238,7 +239,7 @@ runBehaviorTests('Fusion', config, function (deployFn) {
           });
 
           it('burns the catalysts', async function () {
-            await expect(this.receipt).to.emit(this.cata, 'Transfer').withArgs(participant.address, ZeroAddress, blueprint.catalystCost);
+            await expect(this.receipt).to.emit(this.cata, 'Transfer').withArgs(participant.address, constants.AddressZero, blueprint.catalystCost);
           });
 
           it('sends the REVV to the payout wallet', async function () {
@@ -250,7 +251,9 @@ runBehaviorTests('Fusion', config, function (deployFn) {
           });
 
           it('mints the new car to the owner', async function () {
-            await expect(this.receipt).to.emit(this.cars, 'Transfer').withArgs(ZeroAddress, participant.address, blueprint.outputCarBaseId.add(One));
+            await expect(this.receipt)
+              .to.emit(this.cars, 'Transfer')
+              .withArgs(constants.AddressZero, participant.address, blueprint.outputCarBaseId.add(constants.One));
           });
 
           it('increases the chassis number', async function () {
@@ -276,7 +279,7 @@ runBehaviorTests('Fusion', config, function (deployFn) {
           });
 
           it('burns the catalysts', async function () {
-            await expect(this.receipt).to.emit(this.cata, 'Transfer').withArgs(participant.address, ZeroAddress, blueprint.catalystCost);
+            await expect(this.receipt).to.emit(this.cata, 'Transfer').withArgs(participant.address, constants.AddressZero, blueprint.catalystCost);
           });
 
           it('sends the REVV to the payout wallet', async function () {
@@ -289,7 +292,9 @@ runBehaviorTests('Fusion', config, function (deployFn) {
           });
 
           it('mints the new car to the owner', async function () {
-            await expect(this.receipt).to.emit(this.cars, 'Transfer').withArgs(ZeroAddress, participant.address, blueprint.outputCarBaseId.add(One));
+            await expect(this.receipt)
+              .to.emit(this.cars, 'Transfer')
+              .withArgs(constants.AddressZero, participant.address, blueprint.outputCarBaseId.add(constants.One));
           });
 
           it('increases the chassis number', async function () {

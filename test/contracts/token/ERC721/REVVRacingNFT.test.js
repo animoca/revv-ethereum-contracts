@@ -1,10 +1,7 @@
+const {runBehaviorTests} = require('@animoca/ethereum-contract-helpers/src/test/run');
+// const {getDeployerAddress} = require('@animoca/ethereum-contract-helpers/src/test/accounts');
+const {getForwarderRegistryAddress, getOperatorFilterRegistryAddress} = require('@animoca/ethereum-contracts/test/helpers/registries');
 const {behavesLikeERC721} = require('@animoca/ethereum-contracts/test/contracts/token/ERC721/behaviors/ERC721.behavior');
-const {
-  getDeployerAddress,
-  getForwarderRegistryAddress,
-  getOperatorFilterRegistryAddress,
-  runBehaviorTests,
-} = require('@animoca/ethereum-contracts/test/helpers/run');
 
 const name = 'REVV Racing NFT';
 const symbol = 'RR';
@@ -19,8 +16,8 @@ const config = {
   defaultArguments: {
     operatorFilterRegistry: getOperatorFilterRegistryAddress,
     forwarderRegistry: getForwarderRegistryAddress,
-    initialAdmin: getDeployerAddress,
-    initialOwner: getDeployerAddress,
+    // initialAdmin: getDeployerAddress,
+    // initialOwner: getDeployerAddress,
   },
 };
 
