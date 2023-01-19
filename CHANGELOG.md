@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.2.0
+
+### New features
+
+- `REVVMotorsportShardClaim`, a contract to manage cumulative SHRD payouts.
+
 ## 6.1.0
 
 ### Improvements
