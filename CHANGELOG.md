@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.2.1
+
+### Bugfixes
+
+- Revert when trying to fuse with an output base car id containing a non-zero chassis id.
+
 ## 6.2.0
 
 ### New features
