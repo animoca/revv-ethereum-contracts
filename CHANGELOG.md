@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.3.0
+
+### Improvements
+
+- Update to latest dependencies.
+
 ## 6.2.1
 
 ### Bugfixes
