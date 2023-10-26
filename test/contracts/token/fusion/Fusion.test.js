@@ -180,7 +180,7 @@ runBehaviorTests('Fusion', config, function (deployFn) {
     await this.cars.grantRole(await this.cars.MINTER_ROLE(), deployer.address);
     await this.cars.batchMint(participant.address, [defaultCar1, defaultCar2]);
 
-    this.revv = await deployContract('ERC20Mock', '', '', 18, forwarderRegistryAddress);
+    this.revv = await deployContract('ERC20MintBurnMock', '', '', 18, forwarderRegistryAddress);
     await this.revv.grantRole(await this.revv.MINTER_ROLE(), deployer.address);
     await this.revv.mint(participant.address, constants.MaxUint256);
 
@@ -225,6 +225,11 @@ runBehaviorTests('Fusion', config, function (deployFn) {
   });
 
   describe('Blueprint Facet 1 (single car)', function () {
+    it('reverts if the the chassis number of the base output car id is not zero', async function () {
+      await this.cars.mint(participant.address, '57910179610855898424928160541739447587297712243704648546123968643847459705108');
+      await expect(this.contract.connect(participant).fuseWrongbaseOutputCarId()).to.be.revertedWith('Fusion: invalid output base id');
+    });
+
     for (const blueprint of facet1BlueprintsSingle) {
       const method = `fuse_${blueprint.name}(uint256)`;
       describe(method, function () {

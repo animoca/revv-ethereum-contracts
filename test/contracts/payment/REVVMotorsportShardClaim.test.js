@@ -56,7 +56,6 @@ describe('REVVMotorsportShardClaim', function () {
       this.tree = new MerkleTree(this.leaves, keccak256, {hashLeaves: true, sortPairs: true});
       this.root = this.tree.getHexRoot();
       await this.contract.setMerkleRoot(this.root);
-      await this.contract.unpause();
     });
     it('mints the SHRD', async function () {
       const claimData = ethers.utils.defaultAbiCoder.encode(['uint256'], [this.elements[0].amount]);

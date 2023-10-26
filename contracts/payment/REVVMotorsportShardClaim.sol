@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.17;
+pragma solidity 0.8.19;
 
 import {IERC20Mintable} from "@animoca/ethereum-contracts/contracts/token/ERC20/interfaces/IERC20Mintable.sol";
 import {CumulativeMerkleClaim} from "@animoca/ethereum-contracts/contracts/payment/CumulativeMerkleClaim.sol";
