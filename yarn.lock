@@ -12,10 +12,10 @@
   resolved "https://registry.yarnpkg.com/@animoca/ethereum-contract-helpers/-/ethereum-contract-helpers-0.0.1.tgz#265bdef1afe7c9fddcb87219b0e132739563d901"
   integrity sha512-iIkS8NEIkhqjNAGX53uYGAdZ5WtdnSvIW1WbvF37VgWiPk2QjhuNoCS3yofUHFhnFTmDbs8zR9iDd+gbCKPdKA==
 
-"@animoca/ethereum-contracts@=1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@animoca/ethereum-contracts/-/ethereum-contracts-1.1.0.tgz#5c679f341fa9e91451885c4d12e94bdb3ddba005"
-  integrity sha512-gGk3yo00z6Og3JIehVkQeQMpLTpSQoo3oQwkP4CfzAgzXaY+tXLgyudEPYIbYMf7WZIfd+tJiru1J+krEHhZeg==
+"@animoca/ethereum-contracts@=2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@animoca/ethereum-contracts/-/ethereum-contracts-2.0.0.tgz#27eec3f237c8085b23ed3f1585d25fafcd657df4"
+  integrity sha512-ZmErM7cu08gNx08p0sPQKiGAtvjSghhIf730ypEACfB+/eyOS5LAkyS0vZHPjy4w8lmGI8O/ucymxQDaZj6POw==
 
 "@babel/code-frame@^7.0.0":
   version "7.22.13"

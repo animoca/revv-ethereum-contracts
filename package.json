@@ -1,6 +1,6 @@
 {
   "name": "@animoca/revv-ethereum-contracts",
-  "version": "6.3.0",
+  "version": "7.0.0",
   "description": "REVV Solidity Contracts",
   "author": "Animoca Brands",
   "license": "MIT",
@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "@animoca/ethereum-contract-helpers": "^0.0.1",
-    "@animoca/ethereum-contracts": "=1.1.0",
+    "@animoca/ethereum-contracts": "=2.0.0",
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.5",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.7",
     "@nomiclabs/hardhat-ethers": "^2.2.2",
