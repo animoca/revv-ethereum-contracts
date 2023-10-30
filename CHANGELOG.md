@@ -2,8 +2,13 @@
 
 ## 7.0.0
 
+### Breaking Changes
+
 - Updated dependency version: `@animoca/ethereum-contracts@2.0.0`
 - Removed all previously deployed contracts and artifacts.
+
+### New features
+
 - Re-added `REVVMotorsportShardClaim` contract, that unpauses automatically when setting a new Merkle root.
 
 ## 6.3.0
