@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.3.0
+
+- Removed `REVVMotorsportShardClaim` contract.
+
 ## 6.2.1
 
 ### Bugfixes
