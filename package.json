@@ -59,6 +59,7 @@
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-mocha": "^10.1.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "ethereum-universal-forwarder": "0.1.4",
     "ethers": "^5.7.2",
     "fs-extra": "^11.1.0",
     "glob": "^8.1.0",

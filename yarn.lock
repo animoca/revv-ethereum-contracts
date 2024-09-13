@@ -2148,6 +2148,11 @@ ethereum-cryptography@^2.0.0, ethereum-cryptography@^2.1.2:
     "@scure/bip32" "1.3.1"
     "@scure/bip39" "1.2.1"
 
+ethereum-universal-forwarder@0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/ethereum-universal-forwarder/-/ethereum-universal-forwarder-0.1.4.tgz#d4b9d9f44c8f5cf6112f7d50029132b4b5eeb428"
+  integrity sha512-FfzzRYKuU51khHF2Wmk5b1v2OeYsKE7JXYUQUFV3SAIvFI9lwcLbGZPmt8rSjZTwgHr5PngqMNtRRV+RV4z+EQ==
+
 ethereumjs-abi@^0.6.8:
   version "0.6.8"
   resolved "https://registry.yarnpkg.com/ethereumjs-abi/-/ethereumjs-abi-0.6.8.tgz#71bc152db099f70e62f108b7cdfca1b362c6fcae"

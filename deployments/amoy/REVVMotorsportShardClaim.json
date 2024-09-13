@@ -1,0 +1,568 @@
+{
+  "address": "0x90bAD614b635c2537bFe679232B672e8b07281d4",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "contract IERC20Mintable",
+          "name": "shard_",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "claimData",
+          "type": "bytes"
+        },
+        {
+          "internalType": "uint256",
+          "name": "nonce",
+          "type": "uint256"
+        }
+      ],
+      "name": "AlreadyClaimed",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "claimData",
+          "type": "bytes"
+        },
+        {
+          "internalType": "uint256",
+          "name": "nonce",
+          "type": "uint256"
+        }
+      ],
+      "name": "InvalidProof",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "root",
+          "type": "bytes32"
+        }
+      ],
+      "name": "MerkleRootSet",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [],
+      "name": "Paused",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "root",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "claimData",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "nonce",
+          "type": "uint256"
+        }
+      ],
+      "name": "PayoutClaimed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [],
+      "name": "Unpaused",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "claimData",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes32[]",
+          "name": "proof",
+          "type": "bytes32[]"
+        }
+      ],
+      "name": "claimPayout",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "claimed",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "nonce",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pause",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "paused",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "root",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "merkleRoot",
+          "type": "bytes32"
+        }
+      ],
+      "name": "setMerkleRoot",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "shard",
+      "outputs": [
+        {
+          "internalType": "contract IERC20Mintable",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "interfaceId",
+          "type": "bytes4"
+        }
+      ],
+      "name": "supportsInterface",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "unpause",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x29bef81d7c4e8406dfbc2f125af16460c771b2bfa3fd112bd8ca45d6ce8e8124",
+  "receipt": {
+    "to": null,
+    "from": "0x29bD48E4cB7562D660506Ff940365a76A8d407E3",
+    "contractAddress": "0x90bAD614b635c2537bFe679232B672e8b07281d4",
+    "transactionIndex": 0,
+    "gasUsed": "896151",
+    "logsBloom": "0x000000000000800000000000000000000000000000000000008000000000000000000000000000000000000000000000000080000000000000000000004000000000100000000000000000000000108000010000000000000001000010000000000000000200000000000000000008000000000000000000800000000000004000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000040000000000000000800010000000000000000000000000000001810000000e0000000000000000000000000000000008000000000000000000000004000100000",
+    "blockHash": "0x5d266d1c723d8198610cacbed4107d6bdc90fb3e70711b56050bcb57dad9b81a",
+    "transactionHash": "0x29bef81d7c4e8406dfbc2f125af16460c771b2bfa3fd112bd8ca45d6ce8e8124",
+    "logs": [
+      {
+        "transactionIndex": 0,
+        "blockNumber": 11907532,
+        "transactionHash": "0x29bef81d7c4e8406dfbc2f125af16460c771b2bfa3fd112bd8ca45d6ce8e8124",
+        "address": "0x90bAD614b635c2537bFe679232B672e8b07281d4",
+        "topics": [
+          "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x00000000000000000000000029bd48e4cb7562d660506ff940365a76a8d407e3"
+        ],
+        "data": "0x",
+        "logIndex": 0,
+        "blockHash": "0x5d266d1c723d8198610cacbed4107d6bdc90fb3e70711b56050bcb57dad9b81a"
+      },
+      {
+        "transactionIndex": 0,
+        "blockNumber": 11907532,
+        "transactionHash": "0x29bef81d7c4e8406dfbc2f125af16460c771b2bfa3fd112bd8ca45d6ce8e8124",
+        "address": "0x90bAD614b635c2537bFe679232B672e8b07281d4",
+        "topics": [
+          "0x9e87fac88ff661f02d44f95383c817fece4bce600a3dab7a54406878b965e752"
+        ],
+        "data": "0x",
+        "logIndex": 1,
+        "blockHash": "0x5d266d1c723d8198610cacbed4107d6bdc90fb3e70711b56050bcb57dad9b81a"
+      },
+      {
+        "transactionIndex": 0,
+        "blockNumber": 11907532,
+        "transactionHash": "0x29bef81d7c4e8406dfbc2f125af16460c771b2bfa3fd112bd8ca45d6ce8e8124",
+        "address": "0x0000000000000000000000000000000000001010",
+        "topics": [
+          "0x4dfe1bbbcf077ddc3e01291eea2d5c70c2b422b415d95645b9adcfd678cb1d63",
+          "0x0000000000000000000000000000000000000000000000000000000000001010",
+          "0x00000000000000000000000029bd48e4cb7562d660506ff940365a76a8d407e3",
+          "0x0000000000000000000000004ad84f7014b7b44f723f284a85b1662337971439"
+        ],
+        "data": "0x000000000000000000000000000000000000000000000000009f303ab4344f270000000000000000000000000000000000000000000000056a1eb46f27af925500000000000000000000000000000000000000000000028b5788b40929881126000000000000000000000000000000000000000000000005697f8434737b432e00000000000000000000000000000000000000000000028b5827e443ddbc604d",
+        "logIndex": 2,
+        "blockHash": "0x5d266d1c723d8198610cacbed4107d6bdc90fb3e70711b56050bcb57dad9b81a"
+      }
+    ],
+    "blockNumber": 11907532,
+    "cumulativeGasUsed": "896151",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0xe249c50DfBd4c3eCcf7E00C9C068B8Aa32BB9a22"
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "385ebed2725fe50725955ae7f2f54dce",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IERC20Mintable\",\"name\":\"shard_\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"claimData\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"}],\"name\":\"AlreadyClaimed\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"claimData\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"}],\"name\":\"InvalidProof\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"}],\"name\":\"MerkleRootSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"claimData\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"}],\"name\":\"PayoutClaimed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Unpaused\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"claimData\",\"type\":\"bytes\"},{\"internalType\":\"bytes32[]\",\"name\":\"proof\",\"type\":\"bytes32[]\"}],\"name\":\"claimPayout\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"claimed\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"nonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"root\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"merkleRoot\",\"type\":\"bytes32\"}],\"name\":\"setMerkleRoot\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"shard\",\"outputs\":[{\"internalType\":\"contract IERC20Mintable\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unpause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"errors\":{\"AlreadyClaimed(address,bytes,uint256)\":[{\"params\":{\"claimData\":\"The encoded claim data for the claim.\",\"nonce\":\"The nonce as when the claim was made.\",\"recipient\":\"The recipient of the claim.\"}}],\"InvalidProof(address,bytes,uint256)\":[{\"params\":{\"claimData\":\"The encoded claim data for the claim.\",\"nonce\":\"The nonce as when the claim was made.\",\"recipient\":\"The recipient of the claim.\"}}]},\"events\":{\"MerkleRootSet(bytes32)\":{\"params\":{\"root\":\"The new merkle root.\"}},\"OwnershipTransferred(address,address)\":{\"params\":{\"newOwner\":\"the new contract owner.\",\"previousOwner\":\"the previous contract owner.\"}},\"PayoutClaimed(bytes32,address,bytes,uint256)\":{\"params\":{\"claimData\":\"The encoded claim data for the claim.\",\"nonce\":\"The nonce as when the claim was made.\",\"recipient\":\"The recipient of the claim.\",\"root\":\"The merkle root on which the claim was made.\"}}},\"kind\":\"dev\",\"methods\":{\"claimPayout(address,bytes,bytes32[])\":{\"details\":\"Reverts if the contract is paused.Reverts with {AlreadyClaimed} if this specific payout has already been claimed.Reverts with {InvalidProof} if the merkle proof cannot be verified.Emits a {PayoutClaimed} event.\",\"params\":{\"claimData\":\"Encoded claim data for `recipient`\",\"proof\":\"Merkle proof of the user based on the merkle root\",\"recipient\":\"Address of the user to claim the payout\"}},\"owner()\":{\"returns\":{\"_0\":\"The address of the contract owner.\"}},\"pause()\":{\"details\":\"Reverts if the sender is not the contract owner.Reverts if the contract is paused.Emits a {Paused} event.\"},\"paused()\":{\"returns\":{\"_0\":\"isPaused The paused state of the contract.\"}},\"setMerkleRoot(bytes32)\":{\"details\":\"Reverts if not called by the contract owner.Reverts if the contract is not paused.Emits an {Unpaused} event.Emits a {MerkleRootSet} event.\",\"params\":{\"merkleRoot\":\"The merkle root to set.\"}},\"supportsInterface(bytes4)\":{\"details\":\"Note: This function call must use less than 30 000 gas.\",\"params\":{\"interfaceId\":\"the interface identifier to test.\"},\"returns\":{\"_0\":\"True if the interface is supported, false if `interfaceId` is `0xffffffff` or if the interface is not supported.\"}},\"transferOwnership(address)\":{\"details\":\"Reverts if the sender is not the contract owner.Emits an {OwnershipTransferred} event if `newOwner` is different from the current contract owner.\",\"params\":{\"newOwner\":\"The address of the new contract owner. Using the zero address means renouncing ownership.\"}},\"unpause()\":{\"details\":\"Reverts if the sender is not the contract owner.Reverts if the contract is not paused.Emits an {Unpaused} event.\"}},\"version\":1},\"userdoc\":{\"errors\":{\"AlreadyClaimed(address,bytes,uint256)\":[{\"notice\":\"Thrown when trying to claim the same leaf more than once.\"}],\"InvalidProof(address,bytes,uint256)\":[{\"notice\":\"Thrown when a proof cannot be verified.\"}]},\"events\":{\"MerkleRootSet(bytes32)\":{\"notice\":\"Emitted when a new merkle root is set.\"},\"OwnershipTransferred(address,address)\":{\"notice\":\"Emitted when the contract ownership changes.\"},\"Paused()\":{\"notice\":\"Emitted when the pause is triggered.\"},\"PayoutClaimed(bytes32,address,bytes,uint256)\":{\"notice\":\"Emitted when a payout is claimed.\"},\"Unpaused()\":{\"notice\":\"Emitted when the pause is lifted.\"}},\"kind\":\"user\",\"methods\":{\"claimPayout(address,bytes,bytes32[])\":{\"notice\":\"Executes the payout for a given user (anyone can call this function).\"},\"owner()\":{\"notice\":\"Gets the address of the contract owner.\"},\"pause()\":{\"notice\":\"Pauses the contract.\"},\"paused()\":{\"notice\":\"Gets the paused state of the contract.\"},\"setMerkleRoot(bytes32)\":{\"notice\":\"Sets the merkle root for a new claiming period and unpauses the contract.\"},\"supportsInterface(bytes4)\":{\"notice\":\"Returns whether this contract implements a given interface.\"},\"transferOwnership(address)\":{\"notice\":\"Sets the address of the new contract owner.\"},\"unpause()\":{\"notice\":\"Unpauses the contract.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/payment/REVVMotorsportShardClaim.sol\":\"REVVMotorsportShardClaim\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":99999},\"remappings\":[]},\"sources\":{\"@animoca/ethereum-contracts/contracts/access/ContractOwnership.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.8;\\n\\nimport {ContractOwnershipStorage} from \\\"./libraries/ContractOwnershipStorage.sol\\\";\\nimport {ContractOwnershipBase} from \\\"./base/ContractOwnershipBase.sol\\\";\\nimport {InterfaceDetection} from \\\"./../introspection/InterfaceDetection.sol\\\";\\n\\n/// @title ERC173 Contract Ownership Standard (immutable version).\\n/// @dev See https://eips.ethereum.org/EIPS/eip-173\\n/// @dev This contract is to be used via inheritance in an immutable (non-proxied) implementation.\\nabstract contract ContractOwnership is ContractOwnershipBase, InterfaceDetection {\\n    using ContractOwnershipStorage for ContractOwnershipStorage.Layout;\\n\\n    /// @notice Initializes the storage with an initial contract owner.\\n    /// @notice Marks the following ERC165 interface(s) as supported: ERC173.\\n    /// @dev Emits an {OwnershipTransferred} if `initialOwner` is not the zero address.\\n    /// @param initialOwner the initial contract owner.\\n    constructor(address initialOwner) {\\n        ContractOwnershipStorage.layout().constructorInit(initialOwner);\\n    }\\n}\\n\",\"keccak256\":\"0x7c8f90c1f72ccdd900c212f4d0067907c906e4a64856f1b67fee7f7ec13e1f74\",\"license\":\"MIT\"},\"@animoca/ethereum-contracts/contracts/access/base/ContractOwnershipBase.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.8;\\n\\nimport {IERC173} from \\\"./../interfaces/IERC173.sol\\\";\\nimport {ContractOwnershipStorage} from \\\"./../libraries/ContractOwnershipStorage.sol\\\";\\nimport {Context} from \\\"@openzeppelin/contracts/utils/Context.sol\\\";\\n\\n/// @title ERC173 Contract Ownership Standard (proxiable version).\\n/// @dev See https://eips.ethereum.org/EIPS/eip-173\\n/// @dev This contract is to be used via inheritance in a proxied implementation.\\n/// @dev Note: This contract requires ERC165 (Interface Detection Standard).\\nabstract contract ContractOwnershipBase is Context, IERC173 {\\n    using ContractOwnershipStorage for ContractOwnershipStorage.Layout;\\n\\n    /// @inheritdoc IERC173\\n    function owner() public view virtual override returns (address) {\\n        return ContractOwnershipStorage.layout().owner();\\n    }\\n\\n    /// @inheritdoc IERC173\\n    function transferOwnership(address newOwner) public virtual override {\\n        ContractOwnershipStorage.layout().transferOwnership(_msgSender(), newOwner);\\n    }\\n}\\n\",\"keccak256\":\"0xd408d65cc5a0377e5310695c67400dfbd397d6537398d384a70f09b3bfdf8262\",\"license\":\"MIT\"},\"@animoca/ethereum-contracts/contracts/access/interfaces/IERC173.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.8;\\n\\n/// @title ERC-173 Contract Ownership Standard\\n/// @dev See https://eips.ethereum.org/EIPS/eip-173\\n/// @dev Note: the ERC-165 identifier for this interface is 0x7f5828d0\\ninterface IERC173 {\\n    /// @notice Emitted when the contract ownership changes.\\n    /// @param previousOwner the previous contract owner.\\n    /// @param newOwner the new contract owner.\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /// @notice Sets the address of the new contract owner.\\n    /// @dev Reverts if the sender is not the contract owner.\\n    /// @dev Emits an {OwnershipTransferred} event if `newOwner` is different from the current contract owner.\\n    /// @param newOwner The address of the new contract owner. Using the zero address means renouncing ownership.\\n    function transferOwnership(address newOwner) external;\\n\\n    /// @notice Gets the address of the contract owner.\\n    /// @return contractOwner The address of the contract owner.\\n    function owner() external view returns (address contractOwner);\\n}\\n\",\"keccak256\":\"0xc938fcb56171d690dde7435baa80efac146f31165fbad01b6b7db82386b1b893\",\"license\":\"MIT\"},\"@animoca/ethereum-contracts/contracts/access/libraries/ContractOwnershipStorage.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.8;\\n\\nimport {IERC173} from \\\"./../interfaces/IERC173.sol\\\";\\nimport {ProxyInitialization} from \\\"./../../proxy/libraries/ProxyInitialization.sol\\\";\\nimport {InterfaceDetectionStorage} from \\\"./../../introspection/libraries/InterfaceDetectionStorage.sol\\\";\\n\\nlibrary ContractOwnershipStorage {\\n    using ContractOwnershipStorage for ContractOwnershipStorage.Layout;\\n    using InterfaceDetectionStorage for InterfaceDetectionStorage.Layout;\\n\\n    struct Layout {\\n        address contractOwner;\\n    }\\n\\n    bytes32 internal constant LAYOUT_STORAGE_SLOT = bytes32(uint256(keccak256(\\\"animoca.core.access.ContractOwnership.storage\\\")) - 1);\\n    bytes32 internal constant PROXY_INIT_PHASE_SLOT = bytes32(uint256(keccak256(\\\"animoca.core.access.ContractOwnership.phase\\\")) - 1);\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /// @notice Initializes the storage with an initial contract owner (immutable version).\\n    /// @notice Marks the following ERC165 interface(s) as supported: ERC173.\\n    /// @dev Note: This function should be called ONLY in the constructor of an immutable (non-proxied) contract.\\n    /// @dev Emits an {OwnershipTransferred} if `initialOwner` is not the zero address.\\n    /// @param initialOwner The initial contract owner.\\n    function constructorInit(Layout storage s, address initialOwner) internal {\\n        if (initialOwner != address(0)) {\\n            s.contractOwner = initialOwner;\\n            emit OwnershipTransferred(address(0), initialOwner);\\n        }\\n        InterfaceDetectionStorage.layout().setSupportedInterface(type(IERC173).interfaceId, true);\\n    }\\n\\n    /// @notice Initializes the storage with an initial contract owner (proxied version).\\n    /// @notice Sets the proxy initialization phase to `1`.\\n    /// @notice Marks the following ERC165 interface(s) as supported: ERC173.\\n    /// @dev Note: This function should be called ONLY in the init function of a proxied contract.\\n    /// @dev Reverts if the proxy initialization phase is set to `1` or above.\\n    /// @dev Emits an {OwnershipTransferred} if `initialOwner` is not the zero address.\\n    /// @param initialOwner The initial contract owner.\\n    function proxyInit(Layout storage s, address initialOwner) internal {\\n        ProxyInitialization.setPhase(PROXY_INIT_PHASE_SLOT, 1);\\n        s.constructorInit(initialOwner);\\n    }\\n\\n    /// @notice Sets the address of the new contract owner.\\n    /// @dev Reverts if `sender` is not the contract owner.\\n    /// @dev Emits an {OwnershipTransferred} event if `newOwner` is different from the current contract owner.\\n    /// @param newOwner The address of the new contract owner. Using the zero address means renouncing ownership.\\n    function transferOwnership(Layout storage s, address sender, address newOwner) internal {\\n        address previousOwner = s.contractOwner;\\n        require(sender == previousOwner, \\\"Ownership: not the owner\\\");\\n        if (previousOwner != newOwner) {\\n            s.contractOwner = newOwner;\\n            emit OwnershipTransferred(previousOwner, newOwner);\\n        }\\n    }\\n\\n    /// @notice Gets the address of the contract owner.\\n    /// @return contractOwner The address of the contract owner.\\n    function owner(Layout storage s) internal view returns (address contractOwner) {\\n        return s.contractOwner;\\n    }\\n\\n    /// @notice Ensures that an account is the contract owner.\\n    /// @dev Reverts if `account` is not the contract owner.\\n    /// @param account The account.\\n    function enforceIsContractOwner(Layout storage s, address account) internal view {\\n        require(account == s.contractOwner, \\\"Ownership: not the owner\\\");\\n    }\\n\\n    function layout() internal pure returns (Layout storage s) {\\n        bytes32 position = LAYOUT_STORAGE_SLOT;\\n        assembly {\\n            s.slot := position\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0xd8c069442d3de596ee13824f700ef4d640e1429aeaa6b82bfd919f177c656fb3\",\"license\":\"MIT\"},\"@animoca/ethereum-contracts/contracts/introspection/InterfaceDetection.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.8;\\n\\nimport {IERC165} from \\\"./interfaces/IERC165.sol\\\";\\nimport {InterfaceDetectionStorage} from \\\"./libraries/InterfaceDetectionStorage.sol\\\";\\n\\n/// @title ERC165 Interface Detection Standard (immutable or proxiable version).\\n/// @dev This contract is to be used via inheritance in an immutable (non-proxied) or proxied implementation.\\nabstract contract InterfaceDetection is IERC165 {\\n    using InterfaceDetectionStorage for InterfaceDetectionStorage.Layout;\\n\\n    /// @inheritdoc IERC165\\n    function supportsInterface(bytes4 interfaceId) external view override returns (bool) {\\n        return InterfaceDetectionStorage.layout().supportsInterface(interfaceId);\\n    }\\n}\\n\",\"keccak256\":\"0xef423b77e65093f86e7f7ffc35e41f7008304976a7334bb3f9049db69d43eae9\",\"license\":\"MIT\"},\"@animoca/ethereum-contracts/contracts/introspection/interfaces/IERC165.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.8;\\n\\n/// @title ERC165 Interface Detection Standard.\\n/// @dev See https://eips.ethereum.org/EIPS/eip-165.\\n/// @dev Note: The ERC-165 identifier for this interface is 0x01ffc9a7.\\ninterface IERC165 {\\n    /// @notice Returns whether this contract implements a given interface.\\n    /// @dev Note: This function call must use less than 30 000 gas.\\n    /// @param interfaceId the interface identifier to test.\\n    /// @return supported True if the interface is supported, false if `interfaceId` is `0xffffffff` or if the interface is not supported.\\n    function supportsInterface(bytes4 interfaceId) external view returns (bool supported);\\n}\\n\",\"keccak256\":\"0x200c309a198b4f2d5d09ee3ef155ebdb8d8075e205dab2d973139c7ac01c8785\",\"license\":\"MIT\"},\"@animoca/ethereum-contracts/contracts/introspection/libraries/InterfaceDetectionStorage.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.8;\\n\\nimport {IERC165} from \\\"./../interfaces/IERC165.sol\\\";\\n\\nlibrary InterfaceDetectionStorage {\\n    struct Layout {\\n        mapping(bytes4 => bool) supportedInterfaces;\\n    }\\n\\n    bytes32 internal constant LAYOUT_STORAGE_SLOT = bytes32(uint256(keccak256(\\\"animoca.core.introspection.InterfaceDetection.storage\\\")) - 1);\\n\\n    bytes4 internal constant ILLEGAL_INTERFACE_ID = 0xffffffff;\\n\\n    /// @notice Sets or unsets an ERC165 interface.\\n    /// @dev Reverts if `interfaceId` is `0xffffffff`.\\n    /// @param interfaceId the interface identifier.\\n    /// @param supported True to set the interface, false to unset it.\\n    function setSupportedInterface(Layout storage s, bytes4 interfaceId, bool supported) internal {\\n        require(interfaceId != ILLEGAL_INTERFACE_ID, \\\"InterfaceDetection: wrong value\\\");\\n        s.supportedInterfaces[interfaceId] = supported;\\n    }\\n\\n    /// @notice Returns whether this contract implements a given interface.\\n    /// @dev Note: This function call must use less than 30 000 gas.\\n    /// @param interfaceId The interface identifier to test.\\n    /// @return supported True if the interface is supported, false if `interfaceId` is `0xffffffff` or if the interface is not supported.\\n    function supportsInterface(Layout storage s, bytes4 interfaceId) internal view returns (bool supported) {\\n        if (interfaceId == ILLEGAL_INTERFACE_ID) {\\n            return false;\\n        }\\n        if (interfaceId == type(IERC165).interfaceId) {\\n            return true;\\n        }\\n        return s.supportedInterfaces[interfaceId];\\n    }\\n\\n    function layout() internal pure returns (Layout storage s) {\\n        bytes32 position = LAYOUT_STORAGE_SLOT;\\n        assembly {\\n            s.slot := position\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0xa16ca8fae4e72b9e4ba99df2efe41889f330544ac611b65a92b1a358d334fce2\",\"license\":\"MIT\"},\"@animoca/ethereum-contracts/contracts/lifecycle/Pause.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.8;\\n\\nimport {PauseStorage} from \\\"./libraries/PauseStorage.sol\\\";\\nimport {PauseBase} from \\\"./base/PauseBase.sol\\\";\\nimport {ContractOwnership} from \\\"../access/ContractOwnership.sol\\\";\\n\\n/// @title Pausing mechanism (immutable version).\\n/// @dev This contract is to be used via inheritance in an immutable (non-proxied) implementation.\\nabstract contract Pause is PauseBase, ContractOwnership {\\n    using PauseStorage for PauseStorage.Layout;\\n\\n    /// @notice Initializes the storage with an initial pause state.\\n    /// @dev Emits a {Paused} event if `isPaused` is true.\\n    /// @param isPaused The initial pause state.\\n    constructor(bool isPaused) {\\n        PauseStorage.layout().constructorInit(isPaused);\\n    }\\n}\\n\",\"keccak256\":\"0x8fa8023486d561e0a2941485e1d02d9db3f899f143c7f8a6ab0643beeb3258de\",\"license\":\"MIT\"},\"@animoca/ethereum-contracts/contracts/lifecycle/base/PauseBase.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.8;\\n\\nimport {PauseStorage} from \\\"./../libraries/PauseStorage.sol\\\";\\nimport {ContractOwnershipStorage} from \\\"./../../access/libraries/ContractOwnershipStorage.sol\\\";\\nimport {Context} from \\\"@openzeppelin/contracts/utils/Context.sol\\\";\\n\\n/// @title Pausing mechanism (proxiable version).\\n/// @dev This contract is to be used via inheritance in a proxied implementation.\\n/// @dev Note: This contract requires ERC173 (Contract Ownership standard).\\nabstract contract PauseBase is Context {\\n    using PauseStorage for PauseStorage.Layout;\\n    using ContractOwnershipStorage for ContractOwnershipStorage.Layout;\\n\\n    /// @notice Emitted when the pause is triggered.\\n    event Paused();\\n\\n    /// @notice Emitted when the pause is lifted.\\n    event Unpaused();\\n\\n    /// @notice Pauses the contract.\\n    /// @dev Reverts if the sender is not the contract owner.\\n    /// @dev Reverts if the contract is paused.\\n    /// @dev Emits a {Paused} event.\\n    function pause() external {\\n        ContractOwnershipStorage.layout().enforceIsContractOwner(_msgSender());\\n        PauseStorage.layout().pause();\\n    }\\n\\n    /// @notice Unpauses the contract.\\n    /// @dev Reverts if the sender is not the contract owner.\\n    /// @dev Reverts if the contract is not paused.\\n    /// @dev Emits an {Unpaused} event.\\n    function unpause() external {\\n        ContractOwnershipStorage.layout().enforceIsContractOwner(_msgSender());\\n        PauseStorage.layout().unpause();\\n    }\\n\\n    /// @notice Gets the paused state of the contract.\\n    /// @return isPaused The paused state of the contract.\\n    function paused() external view returns (bool) {\\n        return PauseStorage.layout().paused();\\n    }\\n}\\n\",\"keccak256\":\"0x771539326a06f752e7fe6bca3e1f36668749a158bef6e9107e8502d16abe9fd1\",\"license\":\"MIT\"},\"@animoca/ethereum-contracts/contracts/lifecycle/libraries/PauseStorage.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.8;\\n\\nimport {ProxyInitialization} from \\\"./../../proxy/libraries/ProxyInitialization.sol\\\";\\n\\nlibrary PauseStorage {\\n    using PauseStorage for PauseStorage.Layout;\\n\\n    struct Layout {\\n        bool isPaused;\\n    }\\n\\n    bytes32 internal constant LAYOUT_STORAGE_SLOT = bytes32(uint256(keccak256(\\\"animoca.core.lifecycle.Pause.storage\\\")) - 1);\\n    bytes32 internal constant PROXY_INIT_PHASE_SLOT = bytes32(uint256(keccak256(\\\"animoca.core.lifecycle.Pause.phase\\\")) - 1);\\n\\n    event Paused();\\n    event Unpaused();\\n\\n    /// @notice Initializes the storage with an initial pause state (immutable version).\\n    /// @dev Note: This function should be called ONLY in the constructor of an immutable (non-proxied) contract.\\n    /// @dev Emits a {Paused} event if `isPaused` is true.\\n    /// @param isPaused The initial pause state.\\n    function constructorInit(Layout storage s, bool isPaused) internal {\\n        if (isPaused) {\\n            s.isPaused = true;\\n            emit Paused();\\n        }\\n    }\\n\\n    /// @notice Initializes the storage with an initial pause state (proxied version).\\n    /// @notice Sets the proxy initialization phase to `1`.\\n    /// @dev Note: This function should be called ONLY in the init function of a proxied contract.\\n    /// @dev Reverts if the proxy initialization phase is set to `1` or above.\\n    /// @dev Emits a {Paused} event if `isPaused` is true.\\n    /// @param isPaused The initial pause state.\\n    function proxyInit(Layout storage s, bool isPaused) internal {\\n        ProxyInitialization.setPhase(PROXY_INIT_PHASE_SLOT, 1);\\n        s.constructorInit(isPaused);\\n    }\\n\\n    /// @notice Pauses the contract.\\n    /// @dev Reverts if the contract is paused.\\n    /// @dev Emits a {Paused} event.\\n    function pause(Layout storage s) internal {\\n        s.enforceIsNotPaused();\\n        s.isPaused = true;\\n        emit Paused();\\n    }\\n\\n    /// @notice Unpauses the contract.\\n    /// @dev Reverts if the contract is not paused.\\n    /// @dev Emits an {Unpaused} event.\\n    function unpause(Layout storage s) internal {\\n        s.enforceIsPaused();\\n        s.isPaused = false;\\n        emit Unpaused();\\n    }\\n\\n    /// @notice Gets the paused state of the contract.\\n    /// @return isPaused The paused state of the contract.\\n    function paused(Layout storage s) internal view returns (bool isPaused) {\\n        return s.isPaused;\\n    }\\n\\n    /// @notice Ensures that the contract is paused.\\n    /// @dev Reverts if the contract is not paused.\\n    function enforceIsPaused(Layout storage s) internal view {\\n        require(s.isPaused, \\\"Pause: not paused\\\");\\n    }\\n\\n    /// @notice Ensures that the contract is not paused.\\n    /// @dev Reverts if the contract is paused.\\n    function enforceIsNotPaused(Layout storage s) internal view {\\n        require(!s.isPaused, \\\"Pause: paused\\\");\\n    }\\n\\n    function layout() internal pure returns (Layout storage s) {\\n        bytes32 position = LAYOUT_STORAGE_SLOT;\\n        assembly {\\n            s.slot := position\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0xb10c9dfe4535fea92eb0975b33171b65bdb955d997771cb1abf7adb4d27d4756\",\"license\":\"MIT\"},\"@animoca/ethereum-contracts/contracts/payment/CumulativeMerkleClaim.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.8;\\n\\nimport {MerkleProof} from \\\"@openzeppelin/contracts/utils/cryptography/MerkleProof.sol\\\";\\nimport {ContractOwnershipStorage} from \\\"./../access/libraries/ContractOwnershipStorage.sol\\\";\\nimport {PauseStorage} from \\\"./../lifecycle/libraries/PauseStorage.sol\\\";\\nimport {ContractOwnership} from \\\"./../access/ContractOwnership.sol\\\";\\nimport {Pause} from \\\"./../lifecycle/Pause.sol\\\";\\n\\n/// @title CumulativeMerkleClaim\\n/// @notice This contract is designed for claiming payouts which will cumulate over time.\\n/// @notice A merkle tree is generated with one leaf for each claim recipient together with the description of the claim (claimData).\\n/// @notice Flow: when new claims become available, the contract is paused to avoid further claims, a new tree is generated by summing up the current\\n/// @notice unclaimed payouts and the new payouts, per user. The new tree is set and replaces the previous one and the contract is unpaused.\\n/// @notice A nonce is used for each new tree and is included in every leaf to prevent collisions with claims from previous trees.\\nabstract contract CumulativeMerkleClaim is Pause {\\n    using MerkleProof for bytes32[];\\n    using ContractOwnershipStorage for ContractOwnershipStorage.Layout;\\n    using PauseStorage for PauseStorage.Layout;\\n\\n    bytes32 public root;\\n    uint256 public nonce;\\n\\n    mapping(bytes32 => bool) public claimed;\\n\\n    /// @notice Emitted when a new merkle root is set.\\n    /// @param root The new merkle root.\\n    event MerkleRootSet(bytes32 root);\\n\\n    /// @notice Emitted when a payout is claimed.\\n    /// @param root The merkle root on which the claim was made.\\n    /// @param recipient The recipient of the claim.\\n    /// @param claimData The encoded claim data for the claim.\\n    /// @param nonce The nonce as when the claim was made.\\n    event PayoutClaimed(bytes32 indexed root, address indexed recipient, bytes claimData, uint256 nonce);\\n\\n    /// @notice Thrown when trying to claim the same leaf more than once.\\n    /// @param recipient The recipient of the claim.\\n    /// @param claimData The encoded claim data for the claim.\\n    /// @param nonce The nonce as when the claim was made.\\n    error AlreadyClaimed(address recipient, bytes claimData, uint256 nonce);\\n\\n    /// @notice Thrown when a proof cannot be verified.\\n    /// @param recipient The recipient of the claim.\\n    /// @param claimData The encoded claim data for the claim.\\n    /// @param nonce The nonce as when the claim was made.\\n    error InvalidProof(address recipient, bytes claimData, uint256 nonce);\\n\\n    constructor() Pause(true) ContractOwnership(msg.sender) {}\\n\\n    /// @notice Sets the merkle root for a new claiming period and unpauses the contract.\\n    /// @dev Reverts if not called by the contract owner.\\n    /// @dev Reverts if the contract is not paused.\\n    /// @dev Emits an {Unpaused} event.\\n    /// @dev Emits a {MerkleRootSet} event.\\n    /// @param merkleRoot The merkle root to set.\\n    function setMerkleRoot(bytes32 merkleRoot) public {\\n        ContractOwnershipStorage.layout().enforceIsContractOwner(_msgSender());\\n        PauseStorage.layout().unpause();\\n        root = merkleRoot;\\n        ++nonce;\\n        emit MerkleRootSet(merkleRoot);\\n    }\\n\\n    /// @notice Executes the payout for a given user (anyone can call this function).\\n    /// @dev Reverts if the contract is paused.\\n    /// @dev Reverts with {AlreadyClaimed} if this specific payout has already been claimed.\\n    /// @dev Reverts with {InvalidProof} if the merkle proof cannot be verified.\\n    /// @dev Emits a {PayoutClaimed} event.\\n    /// @param recipient Address of the user to claim the payout\\n    /// @param claimData Encoded claim data for `recipient`\\n    /// @param proof Merkle proof of the user based on the merkle root\\n    function claimPayout(address recipient, bytes calldata claimData, bytes32[] calldata proof) external {\\n        PauseStorage.layout().enforceIsNotPaused();\\n\\n        uint256 currentNonce = nonce;\\n        bytes32 currentRoot = root;\\n        bytes32 leaf = keccak256(abi.encodePacked(recipient, claimData, currentNonce));\\n\\n        if (claimed[leaf]) {\\n            revert AlreadyClaimed(recipient, claimData, currentNonce);\\n        }\\n\\n        if (!proof.verifyCalldata(currentRoot, leaf)) {\\n            revert InvalidProof(recipient, claimData, currentNonce);\\n        }\\n\\n        claimed[leaf] = true;\\n\\n        emit PayoutClaimed(currentRoot, recipient, claimData, currentNonce);\\n\\n        _distributePayout(recipient, claimData);\\n    }\\n\\n    /// @notice Distributes the payout to the recipient.\\n    /// @dev This virtual function must be implemented by inheriting contracts.\\n    /// @param recipient Address of the user to claim the payout\\n    /// @param claimData Encoded claim data for `recipient`. The encoding is specific to the inheriting contract, for example a quantity of tokens.\\n    function _distributePayout(address recipient, bytes calldata claimData) internal virtual;\\n}\\n\",\"keccak256\":\"0x1361aea9edc2186ef05761ec228892ce4f8ec2e9c6d47f4dc5d2cae29d7175f2\",\"license\":\"MIT\"},\"@animoca/ethereum-contracts/contracts/proxy/libraries/ProxyInitialization.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.8;\\n\\nimport {StorageSlot} from \\\"@openzeppelin/contracts/utils/StorageSlot.sol\\\";\\n\\n/// @notice Multiple calls protection for storage-modifying proxy initialization functions.\\nlibrary ProxyInitialization {\\n    /// @notice Sets the initialization phase during a storage-modifying proxy initialization function.\\n    /// @dev Reverts if `phase` has been reached already.\\n    /// @param storageSlot the storage slot where `phase` is stored.\\n    /// @param phase the initialization phase.\\n    function setPhase(bytes32 storageSlot, uint256 phase) internal {\\n        StorageSlot.Uint256Slot storage currentVersion = StorageSlot.getUint256Slot(storageSlot);\\n        require(currentVersion.value < phase, \\\"Storage: phase reached\\\");\\n        currentVersion.value = phase;\\n    }\\n}\\n\",\"keccak256\":\"0x15087049c228af4a35975ffcb40747ebceefac58be278a7f2903a9f70c54fa63\",\"license\":\"MIT\"},\"@animoca/ethereum-contracts/contracts/token/ERC20/interfaces/IERC20Mintable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.8;\\n\\n/// @title ERC20 Token Standard, optional extension: Mintable.\\n/// @dev See https://eips.ethereum.org/EIPS/eip-20\\n/// @dev Note: the ERC-165 identifier for this interface is 0x28963e1e.\\ninterface IERC20Mintable {\\n    /// @notice Mints an amount of tokens to a recipient, increasing the total supply.\\n    /// @dev Reverts if `to` is the zero address.\\n    /// @dev Reverts if the total supply overflows.\\n    /// @dev Emits an {IERC20-Transfer} event with `from` set to the zero address.\\n    /// @param to The account to mint the tokens to.\\n    /// @param value The amount of tokens to mint.\\n    function mint(address to, uint256 value) external;\\n\\n    /// @notice Mints multiple amounts of tokens to multiple recipients, increasing the total supply.\\n    /// @dev Reverts if `recipients` and `values` have different lengths.\\n    /// @dev Reverts if one of `recipients` is the zero address.\\n    /// @dev Reverts if the total supply overflows.\\n    /// @dev Emits an {IERC20-Transfer} event for each transfer with `from` set to the zero address.\\n    /// @param recipients The list of accounts to mint the tokens to.\\n    /// @param values The list of amounts of tokens to mint to each of `recipients`.\\n    function batchMint(address[] calldata recipients, uint256[] calldata values) external;\\n}\\n\",\"keccak256\":\"0x2259db124747c81c788c87ba72aee7596e6b41fec83fe4bf9b40b920c7677950\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts v4.4.1 (utils/Context.sol)\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes calldata) {\\n        return msg.data;\\n    }\\n}\\n\",\"keccak256\":\"0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/StorageSlot.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v4.7.0) (utils/StorageSlot.sol)\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev Library for reading and writing primitive types to specific storage slots.\\n *\\n * Storage slots are often used to avoid storage conflict when dealing with upgradeable contracts.\\n * This library helps with reading and writing to such slots without the need for inline assembly.\\n *\\n * The functions in this library return Slot structs that contain a `value` member that can be used to read or write.\\n *\\n * Example usage to set ERC1967 implementation slot:\\n * ```\\n * contract ERC1967 {\\n *     bytes32 internal constant _IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;\\n *\\n *     function _getImplementation() internal view returns (address) {\\n *         return StorageSlot.getAddressSlot(_IMPLEMENTATION_SLOT).value;\\n *     }\\n *\\n *     function _setImplementation(address newImplementation) internal {\\n *         require(Address.isContract(newImplementation), \\\"ERC1967: new implementation is not a contract\\\");\\n *         StorageSlot.getAddressSlot(_IMPLEMENTATION_SLOT).value = newImplementation;\\n *     }\\n * }\\n * ```\\n *\\n * _Available since v4.1 for `address`, `bool`, `bytes32`, and `uint256`._\\n */\\nlibrary StorageSlot {\\n    struct AddressSlot {\\n        address value;\\n    }\\n\\n    struct BooleanSlot {\\n        bool value;\\n    }\\n\\n    struct Bytes32Slot {\\n        bytes32 value;\\n    }\\n\\n    struct Uint256Slot {\\n        uint256 value;\\n    }\\n\\n    /**\\n     * @dev Returns an `AddressSlot` with member `value` located at `slot`.\\n     */\\n    function getAddressSlot(bytes32 slot) internal pure returns (AddressSlot storage r) {\\n        /// @solidity memory-safe-assembly\\n        assembly {\\n            r.slot := slot\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns an `BooleanSlot` with member `value` located at `slot`.\\n     */\\n    function getBooleanSlot(bytes32 slot) internal pure returns (BooleanSlot storage r) {\\n        /// @solidity memory-safe-assembly\\n        assembly {\\n            r.slot := slot\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns an `Bytes32Slot` with member `value` located at `slot`.\\n     */\\n    function getBytes32Slot(bytes32 slot) internal pure returns (Bytes32Slot storage r) {\\n        /// @solidity memory-safe-assembly\\n        assembly {\\n            r.slot := slot\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns an `Uint256Slot` with member `value` located at `slot`.\\n     */\\n    function getUint256Slot(bytes32 slot) internal pure returns (Uint256Slot storage r) {\\n        /// @solidity memory-safe-assembly\\n        assembly {\\n            r.slot := slot\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0xd5c50c54bf02740ebd122ff06832546cb5fa84486d52695a9ccfd11666e0c81d\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/cryptography/MerkleProof.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v4.8.0) (utils/cryptography/MerkleProof.sol)\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev These functions deal with verification of Merkle Tree proofs.\\n *\\n * The tree and the proofs can be generated using our\\n * https://github.com/OpenZeppelin/merkle-tree[JavaScript library].\\n * You will find a quickstart guide in the readme.\\n *\\n * WARNING: You should avoid using leaf values that are 64 bytes long prior to\\n * hashing, or use a hash function other than keccak256 for hashing leaves.\\n * This is because the concatenation of a sorted pair of internal nodes in\\n * the merkle tree could be reinterpreted as a leaf value.\\n * OpenZeppelin's JavaScript library generates merkle trees that are safe\\n * against this attack out of the box.\\n */\\nlibrary MerkleProof {\\n    /**\\n     * @dev Returns true if a `leaf` can be proved to be a part of a Merkle tree\\n     * defined by `root`. For this, a `proof` must be provided, containing\\n     * sibling hashes on the branch from the leaf to the root of the tree. Each\\n     * pair of leaves and each pair of pre-images are assumed to be sorted.\\n     */\\n    function verify(\\n        bytes32[] memory proof,\\n        bytes32 root,\\n        bytes32 leaf\\n    ) internal pure returns (bool) {\\n        return processProof(proof, leaf) == root;\\n    }\\n\\n    /**\\n     * @dev Calldata version of {verify}\\n     *\\n     * _Available since v4.7._\\n     */\\n    function verifyCalldata(\\n        bytes32[] calldata proof,\\n        bytes32 root,\\n        bytes32 leaf\\n    ) internal pure returns (bool) {\\n        return processProofCalldata(proof, leaf) == root;\\n    }\\n\\n    /**\\n     * @dev Returns the rebuilt hash obtained by traversing a Merkle tree up\\n     * from `leaf` using `proof`. A `proof` is valid if and only if the rebuilt\\n     * hash matches the root of the tree. When processing the proof, the pairs\\n     * of leafs & pre-images are assumed to be sorted.\\n     *\\n     * _Available since v4.4._\\n     */\\n    function processProof(bytes32[] memory proof, bytes32 leaf) internal pure returns (bytes32) {\\n        bytes32 computedHash = leaf;\\n        for (uint256 i = 0; i < proof.length; i++) {\\n            computedHash = _hashPair(computedHash, proof[i]);\\n        }\\n        return computedHash;\\n    }\\n\\n    /**\\n     * @dev Calldata version of {processProof}\\n     *\\n     * _Available since v4.7._\\n     */\\n    function processProofCalldata(bytes32[] calldata proof, bytes32 leaf) internal pure returns (bytes32) {\\n        bytes32 computedHash = leaf;\\n        for (uint256 i = 0; i < proof.length; i++) {\\n            computedHash = _hashPair(computedHash, proof[i]);\\n        }\\n        return computedHash;\\n    }\\n\\n    /**\\n     * @dev Returns true if the `leaves` can be simultaneously proven to be a part of a merkle tree defined by\\n     * `root`, according to `proof` and `proofFlags` as described in {processMultiProof}.\\n     *\\n     * CAUTION: Not all merkle trees admit multiproofs. See {processMultiProof} for details.\\n     *\\n     * _Available since v4.7._\\n     */\\n    function multiProofVerify(\\n        bytes32[] memory proof,\\n        bool[] memory proofFlags,\\n        bytes32 root,\\n        bytes32[] memory leaves\\n    ) internal pure returns (bool) {\\n        return processMultiProof(proof, proofFlags, leaves) == root;\\n    }\\n\\n    /**\\n     * @dev Calldata version of {multiProofVerify}\\n     *\\n     * CAUTION: Not all merkle trees admit multiproofs. See {processMultiProof} for details.\\n     *\\n     * _Available since v4.7._\\n     */\\n    function multiProofVerifyCalldata(\\n        bytes32[] calldata proof,\\n        bool[] calldata proofFlags,\\n        bytes32 root,\\n        bytes32[] memory leaves\\n    ) internal pure returns (bool) {\\n        return processMultiProofCalldata(proof, proofFlags, leaves) == root;\\n    }\\n\\n    /**\\n     * @dev Returns the root of a tree reconstructed from `leaves` and sibling nodes in `proof`. The reconstruction\\n     * proceeds by incrementally reconstructing all inner nodes by combining a leaf/inner node with either another\\n     * leaf/inner node or a proof sibling node, depending on whether each `proofFlags` item is true or false\\n     * respectively.\\n     *\\n     * CAUTION: Not all merkle trees admit multiproofs. To use multiproofs, it is sufficient to ensure that: 1) the tree\\n     * is complete (but not necessarily perfect), 2) the leaves to be proven are in the opposite order they are in the\\n     * tree (i.e., as seen from right to left starting at the deepest layer and continuing at the next layer).\\n     *\\n     * _Available since v4.7._\\n     */\\n    function processMultiProof(\\n        bytes32[] memory proof,\\n        bool[] memory proofFlags,\\n        bytes32[] memory leaves\\n    ) internal pure returns (bytes32 merkleRoot) {\\n        // This function rebuild the root hash by traversing the tree up from the leaves. The root is rebuilt by\\n        // consuming and producing values on a queue. The queue starts with the `leaves` array, then goes onto the\\n        // `hashes` array. At the end of the process, the last hash in the `hashes` array should contain the root of\\n        // the merkle tree.\\n        uint256 leavesLen = leaves.length;\\n        uint256 totalHashes = proofFlags.length;\\n\\n        // Check proof validity.\\n        require(leavesLen + proof.length - 1 == totalHashes, \\\"MerkleProof: invalid multiproof\\\");\\n\\n        // The xxxPos values are \\\"pointers\\\" to the next value to consume in each array. All accesses are done using\\n        // `xxx[xxxPos++]`, which return the current value and increment the pointer, thus mimicking a queue's \\\"pop\\\".\\n        bytes32[] memory hashes = new bytes32[](totalHashes);\\n        uint256 leafPos = 0;\\n        uint256 hashPos = 0;\\n        uint256 proofPos = 0;\\n        // At each step, we compute the next hash using two values:\\n        // - a value from the \\\"main queue\\\". If not all leaves have been consumed, we get the next leaf, otherwise we\\n        //   get the next hash.\\n        // - depending on the flag, either another value for the \\\"main queue\\\" (merging branches) or an element from the\\n        //   `proof` array.\\n        for (uint256 i = 0; i < totalHashes; i++) {\\n            bytes32 a = leafPos < leavesLen ? leaves[leafPos++] : hashes[hashPos++];\\n            bytes32 b = proofFlags[i] ? leafPos < leavesLen ? leaves[leafPos++] : hashes[hashPos++] : proof[proofPos++];\\n            hashes[i] = _hashPair(a, b);\\n        }\\n\\n        if (totalHashes > 0) {\\n            return hashes[totalHashes - 1];\\n        } else if (leavesLen > 0) {\\n            return leaves[0];\\n        } else {\\n            return proof[0];\\n        }\\n    }\\n\\n    /**\\n     * @dev Calldata version of {processMultiProof}.\\n     *\\n     * CAUTION: Not all merkle trees admit multiproofs. See {processMultiProof} for details.\\n     *\\n     * _Available since v4.7._\\n     */\\n    function processMultiProofCalldata(\\n        bytes32[] calldata proof,\\n        bool[] calldata proofFlags,\\n        bytes32[] memory leaves\\n    ) internal pure returns (bytes32 merkleRoot) {\\n        // This function rebuild the root hash by traversing the tree up from the leaves. The root is rebuilt by\\n        // consuming and producing values on a queue. The queue starts with the `leaves` array, then goes onto the\\n        // `hashes` array. At the end of the process, the last hash in the `hashes` array should contain the root of\\n        // the merkle tree.\\n        uint256 leavesLen = leaves.length;\\n        uint256 totalHashes = proofFlags.length;\\n\\n        // Check proof validity.\\n        require(leavesLen + proof.length - 1 == totalHashes, \\\"MerkleProof: invalid multiproof\\\");\\n\\n        // The xxxPos values are \\\"pointers\\\" to the next value to consume in each array. All accesses are done using\\n        // `xxx[xxxPos++]`, which return the current value and increment the pointer, thus mimicking a queue's \\\"pop\\\".\\n        bytes32[] memory hashes = new bytes32[](totalHashes);\\n        uint256 leafPos = 0;\\n        uint256 hashPos = 0;\\n        uint256 proofPos = 0;\\n        // At each step, we compute the next hash using two values:\\n        // - a value from the \\\"main queue\\\". If not all leaves have been consumed, we get the next leaf, otherwise we\\n        //   get the next hash.\\n        // - depending on the flag, either another value for the \\\"main queue\\\" (merging branches) or an element from the\\n        //   `proof` array.\\n        for (uint256 i = 0; i < totalHashes; i++) {\\n            bytes32 a = leafPos < leavesLen ? leaves[leafPos++] : hashes[hashPos++];\\n            bytes32 b = proofFlags[i] ? leafPos < leavesLen ? leaves[leafPos++] : hashes[hashPos++] : proof[proofPos++];\\n            hashes[i] = _hashPair(a, b);\\n        }\\n\\n        if (totalHashes > 0) {\\n            return hashes[totalHashes - 1];\\n        } else if (leavesLen > 0) {\\n            return leaves[0];\\n        } else {\\n            return proof[0];\\n        }\\n    }\\n\\n    function _hashPair(bytes32 a, bytes32 b) private pure returns (bytes32) {\\n        return a < b ? _efficientHash(a, b) : _efficientHash(b, a);\\n    }\\n\\n    function _efficientHash(bytes32 a, bytes32 b) private pure returns (bytes32 value) {\\n        /// @solidity memory-safe-assembly\\n        assembly {\\n            mstore(0x00, a)\\n            mstore(0x20, b)\\n            value := keccak256(0x00, 0x40)\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0xd466e8b07f4c6220eac16da5127f3ff142e65f0c15c03c7d38f257b02c8585e1\",\"license\":\"MIT\"},\"contracts/payment/REVVMotorsportShardClaim.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity 0.8.19;\\n\\nimport {IERC20Mintable} from \\\"@animoca/ethereum-contracts/contracts/token/ERC20/interfaces/IERC20Mintable.sol\\\";\\nimport {CumulativeMerkleClaim} from \\\"@animoca/ethereum-contracts/contracts/payment/CumulativeMerkleClaim.sol\\\";\\n\\ncontract REVVMotorsportShardClaim is CumulativeMerkleClaim {\\n    IERC20Mintable public immutable shard;\\n\\n    constructor(IERC20Mintable shard_) {\\n        shard = shard_;\\n    }\\n\\n    function _distributePayout(address claimer, bytes calldata claimData) internal virtual override {\\n        uint256 amount = abi.decode(claimData, (uint256));\\n        shard.mint(claimer, amount);\\n    }\\n}\",\"keccak256\":\"0x81cf9530fdf3d67e6352662b1024d50771b23a6b1fc3facd9f36651a533bbd27\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60a06040523480156200001157600080fd5b50604051620010b7380380620010b7833981016040819052620000349162000257565b6001336200004d816200004662000077565b90620000ad565b5062000064816200005d62000128565b9062000158565b506001600160a01b0316608052620002ab565b600080620000a760017fc9ed16f33ab3a66c84bfd83099ccb2a8845871e2e1c1928f63797152f0fd54cd62000289565b92915050565b6001600160a01b03811615620001045781546001600160a01b0319166001600160a01b03821690811783556040516000907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908290a35b620001246307f5828d60e41b60016200011c62000197565b9190620001c7565b5050565b600080620000a760017f0186a05f63b1553398ad5ea3233c0ce68b8c9eecc47717f123c5c2b42fbd6d9f62000289565b80156200012457815460ff191660011782556040517f9e87fac88ff661f02d44f95383c817fece4bce600a3dab7a54406878b965e75290600090a15050565b600080620000a760017fca9d3e17f264b0f3984e2634e94adb37fa3e6a8103f06aeae6fa59e21c769f5e62000289565b600160e01b6001600160e01b0319831601620002295760405162461bcd60e51b815260206004820152601f60248201527f496e74657266616365446574656374696f6e3a2077726f6e672076616c756500604482015260640160405180910390fd5b6001600160e01b03199190911660009081526020929092526040909120805460ff1916911515919091179055565b6000602082840312156200026a57600080fd5b81516001600160a01b03811681146200028257600080fd5b9392505050565b81810381811115620000a757634e487b7160e01b600052601160045260246000fd5b608051610de9620002ce6000396000818161016001526108310152610de96000f3fe608060405234801561001057600080fd5b50600436106100d45760003560e01c8063996373c311610081578063ebf0c7171161005b578063ebf0c717146101bc578063edcdebcc146101c5578063f2fde38b146101d857600080fd5b8063996373c31461015b578063affed0e014610182578063cc3c0f061461019957600080fd5b80637cb64759116100b25780637cb64759146101135780638456cb59146101265780638da5cb5b1461012e57600080fd5b806301ffc9a7146100d95780633f4ba83a146101015780635c975abb1461010b575b600080fd5b6100ec6100e7366004610aa1565b6101eb565b60405190151581526020015b60405180910390f35b610109610205565b005b6100ec61022a565b610109610121366004610ae3565b610243565b6101096102a7565b6101366102c0565b60405173ffffffffffffffffffffffffffffffffffffffff90911681526020016100f8565b6101367f000000000000000000000000000000000000000000000000000000000000000081565b61018b60015481565b6040519081526020016100f8565b6100ec6101a7366004610ae3565b60026020526000908152604090205460ff1681565b61018b60005481565b6101096101d3366004610b25565b6102e7565b6101096101e6366004610c01565b610495565b60006101ff826101f96104ac565b906104da565b92915050565b610218335b6102126105b4565b906105e2565b610228610223610669565b610697565b565b600061023e610237610669565b5460ff1690565b905090565b61024c3361020a565b610257610223610669565b8060008190555060016000815461026d90610c4b565b909155506040518181527f42cbc405e4dbf1b691e85b9a34b08ecfcf7a9ad9078bf4d645ccfa1fac11c10b9060200160405180910390a150565b6102b03361020a565b6102286102bb610669565b6106f2565b600061023e6102cd6105b4565b5473ffffffffffffffffffffffffffffffffffffffff1690565b6102f76102f2610669565b610750565b60015460008054604051909190610318908990899089908790602001610c83565b604080517fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe081840301815291815281516020928301206000818152600290935291205490915060ff16156103a957878787856040517f7fbf25470000000000000000000000000000000000000000000000000000000081526004016103a09493929190610d0c565b60405180910390fd5b6103b5858584846107bc565b6103f357878787856040517f91ebfb310000000000000000000000000000000000000000000000000000000081526004016103a09493929190610d0c565b6000818152600260205260409081902080547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff001660011790555173ffffffffffffffffffffffffffffffffffffffff89169083907f6a4408e44c908d501056e1ef88baf30a72467f3a181544a67a30cb14c8e8059890610478908b908b908990610d4d565b60405180910390a361048b8888886107d4565b5050505050505050565b6104a933826104a26105b4565b919061088b565b50565b6000806101ff60017fca9d3e17f264b0f3984e2634e94adb37fa3e6a8103f06aeae6fa59e21c769f5e610d71565b60007c01000000000000000000000000000000000000000000000000000000007fffffffff0000000000000000000000000000000000000000000000000000000083160161052a575060006101ff565b7ffe003659000000000000000000000000000000000000000000000000000000007fffffffff0000000000000000000000000000000000000000000000000000000083160161057b575060016101ff565b507fffffffff00000000000000000000000000000000000000000000000000000000166000908152602091909152604090205460ff1690565b6000806101ff60017fc9ed16f33ab3a66c84bfd83099ccb2a8845871e2e1c1928f63797152f0fd54cd610d71565b815473ffffffffffffffffffffffffffffffffffffffff828116911614610665576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601860248201527f4f776e6572736869703a206e6f7420746865206f776e6572000000000000000060448201526064016103a0565b5050565b6000806101ff60017f0186a05f63b1553398ad5ea3233c0ce68b8c9eecc47717f123c5c2b42fbd6d9f610d71565b6106a0816109b8565b80547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff001681556040517fa45f47fdea8a1efdd9029a5691c7f759c32b7c698632b563573e155625d1693390600090a150565b6106fb81610750565b80547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff001660011781556040517f9e87fac88ff661f02d44f95383c817fece4bce600a3dab7a54406878b965e75290600090a150565b805460ff16156104a9576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152600d60248201527f50617573653a207061757365640000000000000000000000000000000000000060448201526064016103a0565b6000826107ca868685610a23565b1495945050505050565b60006107e282840184610ae3565b6040517f40c10f1900000000000000000000000000000000000000000000000000000000815273ffffffffffffffffffffffffffffffffffffffff8681166004830152602482018390529192507f0000000000000000000000000000000000000000000000000000000000000000909116906340c10f1990604401600060405180830381600087803b15801561087757600080fd5b505af115801561048b573d6000803e3d6000fd5b825473ffffffffffffffffffffffffffffffffffffffff9081169083168114610910576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601860248201527f4f776e6572736869703a206e6f7420746865206f776e6572000000000000000060448201526064016103a0565b8173ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff16146109b25783547fffffffffffffffffffffffff00000000000000000000000000000000000000001673ffffffffffffffffffffffffffffffffffffffff8381169182178655604051908316907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e090600090a35b50505050565b805460ff166104a9576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601160248201527f50617573653a206e6f742070617573656400000000000000000000000000000060448201526064016103a0565b600081815b84811015610a6657610a5282878784818110610a4657610a46610d84565b90506020020135610a6f565b915080610a5e81610c4b565b915050610a28565b50949350505050565b6000818310610a8b576000828152602084905260409020610a9a565b60008381526020839052604090205b9392505050565b600060208284031215610ab357600080fd5b81357fffffffff0000000000000000000000000000000000000000000000000000000081168114610a9a57600080fd5b600060208284031215610af557600080fd5b5035919050565b803573ffffffffffffffffffffffffffffffffffffffff81168114610b2057600080fd5b919050565b600080600080600060608688031215610b3d57600080fd5b610b4686610afc565b9450602086013567ffffffffffffffff80821115610b6357600080fd5b818801915088601f830112610b7757600080fd5b813581811115610b8657600080fd5b896020828501011115610b9857600080fd5b602083019650809550506040880135915080821115610bb657600080fd5b818801915088601f830112610bca57600080fd5b813581811115610bd957600080fd5b8960208260051b8501011115610bee57600080fd5b9699959850939650602001949392505050565b600060208284031215610c1357600080fd5b610a9a82610afc565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b60007fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8203610c7c57610c7c610c1c565b5060010190565b7fffffffffffffffffffffffffffffffffffffffff0000000000000000000000008560601b16815282846014830137601492019182015260340192915050565b8183528181602085013750600060208284010152600060207fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f840116840101905092915050565b73ffffffffffffffffffffffffffffffffffffffff85168152606060208201526000610d3c606083018587610cc3565b905082604083015295945050505050565b604081526000610d61604083018587610cc3565b9050826020830152949350505050565b818103818111156101ff576101ff610c1c565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052603260045260246000fdfea2646970667358221220d0d93996c24da7a18561e607c4a327b710b2273e0f28b8447edc88ad2131593c64736f6c63430008130033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100d45760003560e01c8063996373c311610081578063ebf0c7171161005b578063ebf0c717146101bc578063edcdebcc146101c5578063f2fde38b146101d857600080fd5b8063996373c31461015b578063affed0e014610182578063cc3c0f061461019957600080fd5b80637cb64759116100b25780637cb64759146101135780638456cb59146101265780638da5cb5b1461012e57600080fd5b806301ffc9a7146100d95780633f4ba83a146101015780635c975abb1461010b575b600080fd5b6100ec6100e7366004610aa1565b6101eb565b60405190151581526020015b60405180910390f35b610109610205565b005b6100ec61022a565b610109610121366004610ae3565b610243565b6101096102a7565b6101366102c0565b60405173ffffffffffffffffffffffffffffffffffffffff90911681526020016100f8565b6101367f000000000000000000000000000000000000000000000000000000000000000081565b61018b60015481565b6040519081526020016100f8565b6100ec6101a7366004610ae3565b60026020526000908152604090205460ff1681565b61018b60005481565b6101096101d3366004610b25565b6102e7565b6101096101e6366004610c01565b610495565b60006101ff826101f96104ac565b906104da565b92915050565b610218335b6102126105b4565b906105e2565b610228610223610669565b610697565b565b600061023e610237610669565b5460ff1690565b905090565b61024c3361020a565b610257610223610669565b8060008190555060016000815461026d90610c4b565b909155506040518181527f42cbc405e4dbf1b691e85b9a34b08ecfcf7a9ad9078bf4d645ccfa1fac11c10b9060200160405180910390a150565b6102b03361020a565b6102286102bb610669565b6106f2565b600061023e6102cd6105b4565b5473ffffffffffffffffffffffffffffffffffffffff1690565b6102f76102f2610669565b610750565b60015460008054604051909190610318908990899089908790602001610c83565b604080517fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe081840301815291815281516020928301206000818152600290935291205490915060ff16156103a957878787856040517f7fbf25470000000000000000000000000000000000000000000000000000000081526004016103a09493929190610d0c565b60405180910390fd5b6103b5858584846107bc565b6103f357878787856040517f91ebfb310000000000000000000000000000000000000000000000000000000081526004016103a09493929190610d0c565b6000818152600260205260409081902080547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff001660011790555173ffffffffffffffffffffffffffffffffffffffff89169083907f6a4408e44c908d501056e1ef88baf30a72467f3a181544a67a30cb14c8e8059890610478908b908b908990610d4d565b60405180910390a361048b8888886107d4565b5050505050505050565b6104a933826104a26105b4565b919061088b565b50565b6000806101ff60017fca9d3e17f264b0f3984e2634e94adb37fa3e6a8103f06aeae6fa59e21c769f5e610d71565b60007c01000000000000000000000000000000000000000000000000000000007fffffffff0000000000000000000000000000000000000000000000000000000083160161052a575060006101ff565b7ffe003659000000000000000000000000000000000000000000000000000000007fffffffff0000000000000000000000000000000000000000000000000000000083160161057b575060016101ff565b507fffffffff00000000000000000000000000000000000000000000000000000000166000908152602091909152604090205460ff1690565b6000806101ff60017fc9ed16f33ab3a66c84bfd83099ccb2a8845871e2e1c1928f63797152f0fd54cd610d71565b815473ffffffffffffffffffffffffffffffffffffffff828116911614610665576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601860248201527f4f776e6572736869703a206e6f7420746865206f776e6572000000000000000060448201526064016103a0565b5050565b6000806101ff60017f0186a05f63b1553398ad5ea3233c0ce68b8c9eecc47717f123c5c2b42fbd6d9f610d71565b6106a0816109b8565b80547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff001681556040517fa45f47fdea8a1efdd9029a5691c7f759c32b7c698632b563573e155625d1693390600090a150565b6106fb81610750565b80547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff001660011781556040517f9e87fac88ff661f02d44f95383c817fece4bce600a3dab7a54406878b965e75290600090a150565b805460ff16156104a9576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152600d60248201527f50617573653a207061757365640000000000000000000000000000000000000060448201526064016103a0565b6000826107ca868685610a23565b1495945050505050565b60006107e282840184610ae3565b6040517f40c10f1900000000000000000000000000000000000000000000000000000000815273ffffffffffffffffffffffffffffffffffffffff8681166004830152602482018390529192507f0000000000000000000000000000000000000000000000000000000000000000909116906340c10f1990604401600060405180830381600087803b15801561087757600080fd5b505af115801561048b573d6000803e3d6000fd5b825473ffffffffffffffffffffffffffffffffffffffff9081169083168114610910576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601860248201527f4f776e6572736869703a206e6f7420746865206f776e6572000000000000000060448201526064016103a0565b8173ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff16146109b25783547fffffffffffffffffffffffff00000000000000000000000000000000000000001673ffffffffffffffffffffffffffffffffffffffff8381169182178655604051908316907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e090600090a35b50505050565b805460ff166104a9576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601160248201527f50617573653a206e6f742070617573656400000000000000000000000000000060448201526064016103a0565b600081815b84811015610a6657610a5282878784818110610a4657610a46610d84565b90506020020135610a6f565b915080610a5e81610c4b565b915050610a28565b50949350505050565b6000818310610a8b576000828152602084905260409020610a9a565b60008381526020839052604090205b9392505050565b600060208284031215610ab357600080fd5b81357fffffffff0000000000000000000000000000000000000000000000000000000081168114610a9a57600080fd5b600060208284031215610af557600080fd5b5035919050565b803573ffffffffffffffffffffffffffffffffffffffff81168114610b2057600080fd5b919050565b600080600080600060608688031215610b3d57600080fd5b610b4686610afc565b9450602086013567ffffffffffffffff80821115610b6357600080fd5b818801915088601f830112610b7757600080fd5b813581811115610b8657600080fd5b896020828501011115610b9857600080fd5b602083019650809550506040880135915080821115610bb657600080fd5b818801915088601f830112610bca57600080fd5b813581811115610bd957600080fd5b8960208260051b8501011115610bee57600080fd5b9699959850939650602001949392505050565b600060208284031215610c1357600080fd5b610a9a82610afc565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b60007fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8203610c7c57610c7c610c1c565b5060010190565b7fffffffffffffffffffffffffffffffffffffffff0000000000000000000000008560601b16815282846014830137601492019182015260340192915050565b8183528181602085013750600060208284010152600060207fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f840116840101905092915050565b73ffffffffffffffffffffffffffffffffffffffff85168152606060208201526000610d3c606083018587610cc3565b905082604083015295945050505050565b604081526000610d61604083018587610cc3565b9050826020830152949350505050565b818103818111156101ff576101ff610c1c565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052603260045260246000fdfea2646970667358221220d0d93996c24da7a18561e607c4a327b710b2273e0f28b8447edc88ad2131593c64736f6c63430008130033",
+  "devdoc": {
+    "errors": {
+      "AlreadyClaimed(address,bytes,uint256)": [
+        {
+          "params": {
+            "claimData": "The encoded claim data for the claim.",
+            "nonce": "The nonce as when the claim was made.",
+            "recipient": "The recipient of the claim."
+          }
+        }
+      ],
+      "InvalidProof(address,bytes,uint256)": [
+        {
+          "params": {
+            "claimData": "The encoded claim data for the claim.",
+            "nonce": "The nonce as when the claim was made.",
+            "recipient": "The recipient of the claim."
+          }
+        }
+      ]
+    },
+    "events": {
+      "MerkleRootSet(bytes32)": {
+        "params": {
+          "root": "The new merkle root."
+        }
+      },
+      "OwnershipTransferred(address,address)": {
+        "params": {
+          "newOwner": "the new contract owner.",
+          "previousOwner": "the previous contract owner."
+        }
+      },
+      "PayoutClaimed(bytes32,address,bytes,uint256)": {
+        "params": {
+          "claimData": "The encoded claim data for the claim.",
+          "nonce": "The nonce as when the claim was made.",
+          "recipient": "The recipient of the claim.",
+          "root": "The merkle root on which the claim was made."
+        }
+      }
+    },
+    "kind": "dev",
+    "methods": {
+      "claimPayout(address,bytes,bytes32[])": {
+        "details": "Reverts if the contract is paused.Reverts with {AlreadyClaimed} if this specific payout has already been claimed.Reverts with {InvalidProof} if the merkle proof cannot be verified.Emits a {PayoutClaimed} event.",
+        "params": {
+          "claimData": "Encoded claim data for `recipient`",
+          "proof": "Merkle proof of the user based on the merkle root",
+          "recipient": "Address of the user to claim the payout"
+        }
+      },
+      "owner()": {
+        "returns": {
+          "_0": "The address of the contract owner."
+        }
+      },
+      "pause()": {
+        "details": "Reverts if the sender is not the contract owner.Reverts if the contract is paused.Emits a {Paused} event."
+      },
+      "paused()": {
+        "returns": {
+          "_0": "isPaused The paused state of the contract."
+        }
+      },
+      "setMerkleRoot(bytes32)": {
+        "details": "Reverts if not called by the contract owner.Reverts if the contract is not paused.Emits an {Unpaused} event.Emits a {MerkleRootSet} event.",
+        "params": {
+          "merkleRoot": "The merkle root to set."
+        }
+      },
+      "supportsInterface(bytes4)": {
+        "details": "Note: This function call must use less than 30 000 gas.",
+        "params": {
+          "interfaceId": "the interface identifier to test."
+        },
+        "returns": {
+          "_0": "True if the interface is supported, false if `interfaceId` is `0xffffffff` or if the interface is not supported."
+        }
+      },
+      "transferOwnership(address)": {
+        "details": "Reverts if the sender is not the contract owner.Emits an {OwnershipTransferred} event if `newOwner` is different from the current contract owner.",
+        "params": {
+          "newOwner": "The address of the new contract owner. Using the zero address means renouncing ownership."
+        }
+      },
+      "unpause()": {
+        "details": "Reverts if the sender is not the contract owner.Reverts if the contract is not paused.Emits an {Unpaused} event."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "errors": {
+      "AlreadyClaimed(address,bytes,uint256)": [
+        {
+          "notice": "Thrown when trying to claim the same leaf more than once."
+        }
+      ],
+      "InvalidProof(address,bytes,uint256)": [
+        {
+          "notice": "Thrown when a proof cannot be verified."
+        }
+      ]
+    },
+    "events": {
+      "MerkleRootSet(bytes32)": {
+        "notice": "Emitted when a new merkle root is set."
+      },
+      "OwnershipTransferred(address,address)": {
+        "notice": "Emitted when the contract ownership changes."
+      },
+      "Paused()": {
+        "notice": "Emitted when the pause is triggered."
+      },
+      "PayoutClaimed(bytes32,address,bytes,uint256)": {
+        "notice": "Emitted when a payout is claimed."
+      },
+      "Unpaused()": {
+        "notice": "Emitted when the pause is lifted."
+      }
+    },
+    "kind": "user",
+    "methods": {
+      "claimPayout(address,bytes,bytes32[])": {
+        "notice": "Executes the payout for a given user (anyone can call this function)."
+      },
+      "owner()": {
+        "notice": "Gets the address of the contract owner."
+      },
+      "pause()": {
+        "notice": "Pauses the contract."
+      },
+      "paused()": {
+        "notice": "Gets the paused state of the contract."
+      },
+      "setMerkleRoot(bytes32)": {
+        "notice": "Sets the merkle root for a new claiming period and unpauses the contract."
+      },
+      "supportsInterface(bytes4)": {
+        "notice": "Returns whether this contract implements a given interface."
+      },
+      "transferOwnership(address)": {
+        "notice": "Sets the address of the new contract owner."
+      },
+      "unpause()": {
+        "notice": "Unpauses the contract."
+      }
+    },
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 777,
+        "contract": "contracts/payment/REVVMotorsportShardClaim.sol:REVVMotorsportShardClaim",
+        "label": "root",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_bytes32"
+      },
+      {
+        "astId": 779,
+        "contract": "contracts/payment/REVVMotorsportShardClaim.sol:REVVMotorsportShardClaim",
+        "label": "nonce",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 783,
+        "contract": "contracts/payment/REVVMotorsportShardClaim.sol:REVVMotorsportShardClaim",
+        "label": "claimed",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_mapping(t_bytes32,t_bool)"
+      }
+    ],
+    "types": {
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_bytes32": {
+        "encoding": "inplace",
+        "label": "bytes32",
+        "numberOfBytes": "32"
+      },
+      "t_mapping(t_bytes32,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_bytes32",
+        "label": "mapping(bytes32 => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}
